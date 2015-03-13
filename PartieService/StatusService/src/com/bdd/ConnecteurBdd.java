@@ -14,7 +14,7 @@ public class ConnecteurBdd {
 	public static String userOracle="esilifeuser";
 	public static String passwordOracle="esilife1062906";
 	public static String driverOracle="oracle.jdbc.driver.OracleDriver";
-	public static final boolean test=true;
+	public static final boolean test=false;
 	
 	private ConnecteurBdd(){
 		
