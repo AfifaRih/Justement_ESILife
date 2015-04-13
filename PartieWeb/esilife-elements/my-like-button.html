@@ -1,0 +1,70 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-icon/core-icon.html" rel="import">
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-animation/core-animation.html" rel="import">
+<link href="../components/core-animation/core-animation-group.html" rel="import">
+<link href="../components/font-roboto/roboto.html" rel="import">
+
+<polymer-element name="my-like-button" attributes="like">
+  <template>
+  	<style shim-shadowdom>
+  		#target {
+	      display: inline-block;
+	      font-size: 32px;
+	      -webkit-transform: translateZ(0);
+	      transform: translateZ(0);
+	      color: {{like ? 'red' : 'blue'}};
+	      cursor: pointer;
+	    }
+  	</style>
+    <div id="target" on-click="{{buttonClick}}" layout horizontal center>
+    	<core-icon icon="thumb-up"></core-icon>
+      <core-animation-group type="seq">
+        <core-animation duration="300">
+          <core-animation-keyframe>
+            <core-animation-prop name="opacity" value="1">
+            </core-animation-prop>
+          </core-animation-keyframe>
+          <core-animation-keyframe>
+            <core-animation-prop name="opacity" value="0.3">
+            </core-animation-prop>
+          </core-animation-keyframe>
+          <core-animation-keyframe>
+            <core-animation-prop name="opacity" value="1">
+            </core-animation-prop>
+          </core-animation-keyframe>
+        </core-animation>
+        <core-animation duration="300">
+          <core-animation-keyframe>
+            <core-animation-prop name="transform" value="scale(1)">
+            </core-animation-prop>
+          </core-animation-keyframe>
+          <core-animation-keyframe>
+            <core-animation-prop name="transform" value="scale(2)">
+            </core-animation-prop>
+          </core-animation-keyframe>
+          <core-animation-keyframe>
+            <core-animation-prop name="transform" value="scale(1)">
+            </core-animation-prop>
+          </core-animation-keyframe>
+        </core-animation>
+      </core-animation-group>
+    </div>
+  </template>
+  <script>
+	Polymer('my-like-button',{
+		like: false,
+		buttonClick: function(e, detail, sender) {
+			
+			var player;
+			var t = e.target;
+  			var a = this.shadowRoot.querySelector('core-animation,core-animation-group');
+  			var icon = this.shadowRoot.querySelector('#target');
+		    a.target = icon;
+		    player = a.play();
+		    this.like = !this.like;
+    	},
+	});
+  </script>
+</polymer-element>

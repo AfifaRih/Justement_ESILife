@@ -1,0 +1,46 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<link rel="import" href="../components/core-signals/core-signals.html">
+<link href="publier-button/publier-button.html" rel="impor"/>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+       <script src="../js/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../js/bower_components/angular/angular.js"></script>
+    <script src="../js/bower_components/angular-route/angular-route.js"></script>
+    <script src="../js/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../js/app.js"></script> 
+    <script src="../js/controllers.js"></script> 
+    <script src="../js/services.js"></script> 
+
+<polymer-element name="my-statut-footer_OnEdit">
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			text-align: right;
+  		}
+  		.colored {
+	      background: #4285f4;
+	      color: #fff;
+	    }
+	    .shadow{
+	    	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+	    }
+    </style>
+    <div class="tag-container">
+    	<paper-button class="shadow" on-click='{{annulerClick}}'>Annuler</paper-button>
+    	<paper-button class="colored shadow" on-click='{{publierClick}}'>Publier</paper-button>
+    </div>
+  </template>
+  <script src="../ng-polymer-elements/ng-polymer-elements.js"></script>
+  <script>
+	Polymer('my-statut-footer_OnEdit',{
+		annulerClick: function(e, detail, sender){
+			this.fire('core-signal', {name: "annuler", data: true});
+		},
+		
+		publierClick: function(e, detail, sender){
+			this.fire('core-signal', {name: "publier", data: true});
+		},
+	});
+  </script>
+</polymer-element>

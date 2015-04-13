@@ -1,0 +1,97 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/core-icons/core-icons.html">
+<link rel="import" href="../components/font-roboto/roboto.html">
+<link rel="import" href="../components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../components/core-media-query/core-media-query.html">
+<link rel="import" href="../components/paper-icon-button/paper-icon-button.html">
+<link href="../components/core-collapse/core-collapse.html" rel="import">
+  <link href="../components/core-icons/core-icons.html" rel="import">
+  <link href="../components/core-menu/core-menu.html" rel="import">
+  <link href="../components/paper-button/paper-button.html" rel="import">
+  <link href="../components/paper-dropdown/paper-dropdown.html" rel="import">
+  <link href="../components/paper-icon-button/paper-icon-button.html" rel="import">
+  <link href="../components/core-item/core-item.html" rel="import">
+<link href="../components/paper-fab/paper-fab.html" rel="import">
+  <link href="../components/paper-menu-button/paper-menu-button.html" rel="import">
+
+<polymer-element name="my-header-onConnect">
+  <template>
+  	<style shim-shadowdom>
+  		.tall{
+  			height: 50px;
+  		}
+  		paper-tabs, core-toolbar {
+		  background-color: #00bcd4;
+		  color: #fff;
+		  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
+		}
+		
+		core-toolbar paper-tabs {
+		  box-shadow: none;
+		}
+		
+		paper-tabs[noink][nobar] paper-tab.core-selected {
+		  color: #ffff8d;
+		}
+		
+		paper-tabs.transparent-teal {
+		  background-color: transparent;
+		  color: #00bcd4;
+		  box-shadow: none;
+		}
+		
+		paper-tabs.transparent-teal::shadow #selectionBar {
+		  background-color: #00bcd4;
+		}
+		
+		paper-tabs.transparent-teal paper-tab::shadow #ink {
+		  color: #00bcd4;
+		}
+		core-item {
+	      overflow: hidden;
+	      white-space: nowrap;
+	      text-overflow: ellipsis;
+	      color:red;
+	      padding: 0.05em 1em;
+	      font-size: 14px;
+	    }
+	    core-item:hover {
+	    
+	    	background-color: rgba(0,0,0,0.05);
+	    }
+	    .menuItem{
+	    	width: 140px;
+	    	cursor: pointer;
+	    }
+
+  	</style>
+  	<core-toolbar horizontal end-justified layout>
+  	<div class="bottom" flex></div>
+  	<paper-menu-button layout>
+  		<paper-fab mini icon="perm-identity" title="done"></paper-fab>
+        <div>
+	        <paper-dropdown class="dropdown" halign="right">
+	          <core-menu  style="margin: 0">
+	            <core-item label="Déconnexion"></core-item>
+	          </core-menu>
+	        </paper-dropdown>
+        </div>
+    </paper-menu-button>
+    <paper-tabs selected="0" class="bottom" self-end style="margin-right: 20%">
+  
+      <paper-tab class="menuItem">Accueil</paper-tab>
+      
+    </paper-tabs>
+    
+    
+    
+      
+  </core-toolbar>
+  </template>
+  <script>
+	Polymer('my-header',{
+		});
+  </script>
+</polymer-element>
