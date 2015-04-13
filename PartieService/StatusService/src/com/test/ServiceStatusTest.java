@@ -2,6 +2,7 @@ package com.test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,7 +13,6 @@ import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import com.bdd.ConnecteurBdd;
-
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -48,6 +48,8 @@ public class ServiceStatusTest {
 			fail("requete sql ne fonctionne pas");
 		} catch (JSONException e) {
 			fail("traduction en json object ne fonctionne pas");
+		} catch (IOException e) {
+			fail("traduction en json object ne fonctionne pas");
 		}
 		
 	}
@@ -61,6 +63,8 @@ public class ServiceStatusTest {
 			Contenu c=s.getConetenu(new JSONObject(JsonPacketSimule));
 			assertTrue("transformation en objet contenu erroné",c.getContenu_date_modification().equals(new Date("2/2/2002")) && c.getContenu_date_publication().equals(new Date("1/1/2001")) && c.getContenu_text().compareTo("test")==0);
 		} catch (JSONException e) {
+			fail("traduction en json object ne fonctionne pas");
+		} catch (IOException e) {
 			fail("traduction en json object ne fonctionne pas");
 		}
 		

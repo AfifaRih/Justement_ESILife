@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+
 public class ConnecteurBdd {
-	static Connection connect;
+	static ConnectionSource connect;
 	public static String urlMysql="jdbc:mysql://localhost:3306/dlala";
 	public static String userMysql="root";
 	public static String passwordMysql="a1551993";
@@ -14,32 +17,18 @@ public class ConnecteurBdd {
 	public static String userOracle="esilifeuser";
 	public static String passwordOracle="esilife1062906";
 	public static String driverOracle="oracle.jdbc.driver.OracleDriver";
-	public static final boolean test=false;
+	public static final boolean test=true;
 	
 	private ConnecteurBdd(){
 		
 	}
-	public static Connection getConnexion(){
+	public static ConnectionSource getConnexion(){
 		if(connect==null){
 			try {
-				if(test){
-					Class.forName(driverMysql);
-				}else{
-					Class.forName(driverOracle);
-				}
-	            
-	        } catch (ClassNotFoundException e) {
-	        }
-	        try {
-	        	if(test){
-	        		connect = DriverManager.getConnection(urlMysql, userMysql, passwordMysql);
-				}else{
-					connect = DriverManager.getConnection(urlOracle, userOracle, passwordOracle);
-				}
-	            
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
+				connect=new JdbcConnectionSource(ConnecteurBdd.url(),ConnecteurBdd.user(),ConnecteurBdd.password());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return connect;
 	}

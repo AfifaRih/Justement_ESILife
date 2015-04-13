@@ -39,7 +39,7 @@ public class ServiceAimer {
 		try {
 			paquetRecu = new JSONObject(incomingData);
 			traitementAuthentification(paquetRecu);
-			ConnectionSource connexionSource=new JdbcConnectionSource(ConnecteurBdd.url(),ConnecteurBdd.user(),ConnecteurBdd.password());
+			ConnectionSource connexionSource=ConnecteurBdd.getConnexion();
 			Dao<Utilisateur, Integer> daoUtilisateur=DaoManager.createDao(connexionSource, Utilisateur.class);
 			int id_contenu=paquetRecu.getInt("id_contenu");
 			int id_user=paquetRecu.getInt("id_user");

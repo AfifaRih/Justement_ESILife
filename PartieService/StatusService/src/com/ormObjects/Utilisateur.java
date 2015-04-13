@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Utilisateur {
 	@DatabaseField(id=true,columnName=COLUMN_USER_ID)
 	private int cle_user;
-	@DatabaseField(canBeNull=false,columnName=COLUMN_USER_ID)
+	@DatabaseField(canBeNull=false,columnName=COLUMN_USER_COMPTE)
 	private String compte_user;
 	@DatabaseField(canBeNull=false,columnName=COLUMN_BLOQUE,defaultValue="0")
 	private int booleenBloque;
