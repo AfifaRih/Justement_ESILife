@@ -1,31 +1,4 @@
-
-/*insert into UTILISATEUR
-    (CLE_UTILISATEUR,esi_gmail_compte,motDePass,bloqued)
-values 
-    (cle_utilisateur.nextval,'mail','kkk',0);*/
-    
-
-/*create table Suivi
-(
-  cleSuivi integer not null,
-  utilisateurSuiveur integer not null,
-  utilisateurSuivi integer not null,
-  CONSTRAINT suiveurFk FOREIGN KEY (utilisateurSuiveur) REFERENCES Utilisateur(cleUtilisateur),
-  CONSTRAINT suiviFk FOREIGN KEY (utilisateurSuivi) REFERENCES Utilisateur(cleUtilisateur),
-  CONSTRAINT uniqueSuiveurSuivi UNIQUE (utilisateurSuiveur, utilisateurSuivi),
-  primary key (cleSuivi)
-);
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON suivi TO esilifeuser;
-
-
-Create sequence cleSuivi start with 1
-increment by 1
-minvalue 1;*/
-
-
-/*******************************/
-drop user esilifeuser;
+drop user esilifeuser cascade;
 CREATE USER esilifeuser
   IDENTIFIED BY esilifeuser
   DEFAULT TABLESPACE USERS
@@ -33,32 +6,41 @@ CREATE USER esilifeuser
   PROFILE DEFAULT
   ACCOUNT UNLOCK;
 
-create table Utilisateur
+drop table utilisateur;
+drop table etudiant_affilie;
+drop table moderateur;
+drop table administratif;
+drop table enseignant;
+drop table contenu;
+drop table utilisateur_contenu_aimer;
+drop sequence "utilisateur_cle";
+drop sequence "contenu_cle";
+drop sequence "utilisateur_contenu_aimer_cle";
+
+create table utilisateur
 (
-    utilisateur_cle  integer not null ,
-    utilisateur_compte varchar(100) not null,
-    utilisateur_mot_pass        varchar(100) not null ,
-    utilisateur_bloque          integer default 0 not null,
-    constraint booleanBloqued check (utilisateur_bloque= 0 or utilisateur_bloque=1),
-    primary key (utilisateur_cle),
-    constraint uniqueCompte unique(utilisateur_compte)
+    "utilisateur_cle"  integer not null ,
+    "utilisateur_compte" varchar(100) not null,
+    "utilisateur_bloque"          integer default 0 not null,
+    constraint booleanBloqued check ("utilisateur_bloque"= 0 or "utilisateur_bloque"=1),
+    primary key ("utilisateur_cle"),
+    constraint uniqueCompte unique("utilisateur_compte")
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON utilisateur TO esilifeuser;
 
-Create sequence utilisateur_cle start with 1
+Create sequence "utilisateur_cle" start with 1
 increment by 1
 minvalue 1;
 
 
 create table etudiant_affilie
 (
-    utilisateur_cle  integer not null ,
-    primary key (utilisateur_cle),
-    etudiant_affilie_annee integer not null,
-    etudiant_affilie_section integer not null,
-    etudiant_affilie_specialite integer not null
-    
+	"utilisateur_cle"  integer not null,
+    	"etudiant_affilie_annee" integer not null,
+    	"etudiant_affilie_section" integer not null,
+    	"etudiant_affilie_specialite" integer not null,
+	primary key ("utilisateur_cle")  
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON etudiant_affilie TO esilifeuser;
@@ -66,16 +48,16 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON etudiant_affilie TO esilifeuser;
 
 create table moderateur
 (
-    utilisateur_cle  integer not null ,
-    primary key (utilisateur_cle)    
+	"utilisateur_cle"  integer not null ,
+ 	primary key ("utilisateur_cle")    
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON moderateur TO esilifeuser;
 
 create table administratif
 (
-    utilisateur_cle  integer not null ,
-    primary key (utilisateur_cle)    
+	"utilisateur_cle"  integer not null ,
+	 primary key ("utilisateur_cle")    
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON administratif TO esilifeuser;
@@ -83,8 +65,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON administratif TO esilifeuser;
 
 create table enseignant
 (
-    utilisateur_cle  integer not null ,
-    primary key (utilisateur_cle)    
+	"utilisateur_cle"  integer not null ,
+    	primary key ("utilisateur_cle")    
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON enseignant TO esilifeuser;
@@ -92,14 +74,41 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON enseignant TO esilifeuser;
 
 create table contenu
 (
-    contenu_cle  integer not null ,
-    contenu_date_publication date not null,
-    contenu_date_modification date default null,
-    constraint date_publication_modification 
-      check(contenu_date_publication <= contenu_date_modification),
-    primary key (contenu_cle)    
+	 "contenu_cle"  integer not null ,
+    	 "contenu_date_publication" date not null,
+    	 "contenu_date_modification" date default null,
+    	 "contenu_text" varchar(1000) not null,
+    	 "utilisateur_cle" integer not null,
+    	 "contenu_binaire" bfile default null,
+    	 "contenu_type" varchar(20) not null,
+	 "contenu_accepter"  integer default 0 not null,
+  	 constraint "date_publication_modification" 
+      	 check("contenu_date_publication" <= "contenu_date_modification"),
+	 constraint fk_PerOrders FOREIGN KEY ("utilisateur_cle")
+	 REFERENCES utilisateur("utilisateur_cle"),
+    	 primary key ("contenu_cle")    
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON contenu TO esilifeuser;
 
+Create sequence "contenu_cle" start with 1
+increment by 1
+minvalue 1;
 
+create table utilisateur_contenu_aimer
+(
+	"utilisateur_contenu_aimer_cle" integer not null,
+	"utilisateur_fk_cle" integer not null,
+	"contenu_fk_cle" integer not null,
+	constraint fk_PerOrders2 FOREIGN KEY ("utilisateur_fk_cle")
+	REFERENCES utilisateur("utilisateur_cle"),
+	constraint fk_PerOrders3 FOREIGN KEY ("contenu_fk_cle")
+	REFERENCES contenu("contenu_cle"),
+	primary key ("utilisateur_contenu_aimer_cle") 
+);
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON utilisateur_contenu_aimer TO esilifeuser;
+
+Create sequence "utilisateur_contenu_aimer_cle" start with 1
+increment by 1
+minvalue 1;
