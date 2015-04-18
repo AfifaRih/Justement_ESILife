@@ -2,6 +2,7 @@
 
 <link rel="import" href="../components/paper-button/paper-button.html"/>
 <link rel="import" href="../components/core-signals/core-signals.html">
+<link rel="import" href="my-statut-button-load.html">
 <link href="publier-button/publier-button.html" rel="impor"/>
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
        <script src="../js/bower_components/jquery/dist/jquery.js"></script>
@@ -17,6 +18,7 @@
   	<style shim-shadowdom>
   		.tag-container{
   			text-align: right;
+  			position: relative;
   		}
   		.colored {
 	      background: #4285f4;
@@ -25,18 +27,21 @@
 	    .shadow{
 	    	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
 	    }
+	    .loader{
+  			position:absolute;
+  			
+  			left: 0px;
+  			
+  		}
     </style>
     <div class="tag-container">
-    	<paper-button class="shadow" on-click='{{annulerClick}}'>Annuler</paper-button>
     	<paper-button class="colored shadow" on-click='{{publierClick}}'>Publier</paper-button>
+    	<my-statut-button-load class="loader"></my-statut-button-load>
     </div>
   </template>
   <script src="../ng-polymer-elements/ng-polymer-elements.js"></script>
   <script>
 	Polymer('my-statut-footer_OnEdit',{
-		annulerClick: function(e, detail, sender){
-			this.fire('core-signal', {name: "annuler", data: true});
-		},
 		
 		publierClick: function(e, detail, sender){
 			this.fire('core-signal', {name: "publier", data: true});

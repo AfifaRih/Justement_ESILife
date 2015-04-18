@@ -32,18 +32,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved id="controller" ng-controller="MurCtrl">
 	<my-header></my-header>
 	
-	<div horizontal layout class="bodyContainer"  style="background-color: rgba(0,0,0,0.1)">
+	<div horizontal layout class="bodyContainer">
 	  <div flex horizontal layout>
 	  	<div flex two>
 	  	</div>
 	  	<div flex four >
 	  		<div>
-				<my-statut_onEdit ></my-statut_onEdit> 
+				<my-statut_onEdit></my-statut_onEdit> 
 			</div>
 			<div>
 			<!--my-statut_onView class="statut" ng-repeat="cnt in contenu"
 			statut={{cnt}}>
 		</my-statut_onView--> 
+		<my-statut_onView class="statut" statut={"userName":"Afifa", "datePub":"datePub","contentText":"contentText", "like":"true", "nbrLike":"0"}></my-statut_onView>
 			</div>
 	  	</div>
 	  	<div flex one>

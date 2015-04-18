@@ -1,0 +1,214 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<link href="../components/core-icon/core-icon.html" rel="import">
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-icons/communication-icons.html" rel="import">
+<link href="../components/core-icons/editor-icons.html" rel="import">
+<link href="../components/core-icons/av-icons.html" rel="import">
+<link href="../components/core-icons/image-icons.html" rel="import">
+<link href="../components/core-icons/-icons.html" rel="import">
+<link rel="import" href="../components/core-signals/core-signals.html">
+
+<link href="../components/core-animation/core-animation.html" rel="import">
+<link href="../components/core-animation/core-animation-group.html" rel="import">
+<link href="../components/font-roboto/roboto.html" rel="import">
+
+<polymer-element name="my-statut-button-load">
+  <template>
+  	<style shim-shadowdom>
+  		.load-button{
+  			display: inline-block;
+	      	-webkit-transform: translateZ(0);
+	      	transform: translateZ(0);
+	      	color: #a9a9a9;
+	      	font-family: 'Roboto-Light';
+	      	margin-right: 0.4em;
+  		}
+  		.load-text{
+  			font-size: 15px;	
+  			vertical-align: center;
+  			line-height: 25px;
+  		}
+  		.load-button:hover{
+  			color: red;
+  		}
+  		.load-button *{
+  			cursor: pointer;
+  		}
+  		
+  		.load-file{
+  			display: none;
+  		}
+  	</style>
+    <div class="load-bar" layout horizontal>
+	<div on-click="{{imageClick}}" class="load-button">
+	    <div id="target-image" layout horizontal>
+	    	<core-icon icon="image:collections"> </core-icon>
+	      <core-animation-group type="seq">
+	        <core-animation duration="300">
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="1">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="0.3">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="1">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	        </core-animation>
+	        <core-animation duration="300">
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(1)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(2)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(1)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	        </core-animation>
+	      </core-animation-group>
+	      <label class="load-text">Image</label>
+	      <input type="file" class="load-file" id="load-file-image" accept="image/*" on-change="{{fireImageClick}}"/>
+      </div>
+    </div>
+    <div on-click="{{videoClick}}" class="load-button">
+	    <div id="target-vide" layout horizontal>
+	    	<core-icon icon="av:video-collection"></core-icon>
+	      <core-animation-group type="seq">
+	        <core-animation duration="300">
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="1">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="0.3">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="1">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	        </core-animation>
+	        <core-animation duration="300">
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(1)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(2)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(1)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	        </core-animation>
+	      </core-animation-group>
+	    <label class="load-text">Vidéo</label>
+	    <input type="file" class="load-file" id="load-file-video" accept="video/*" on-change="{{fireVideoClick}}"/>
+	    </div>
+    </div>
+    <div on-click="{{courClick}}" class="load-button">
+	    <div id="target-cour" layout horizontal center>
+	    	<core-icon icon="editor:insert-drive-file"></core-icon>
+	      <core-animation-group type="seq">
+	        <core-animation duration="300">
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="1">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="0.3">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="opacity" value="1">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	        </core-animation>
+	        <core-animation duration="300">
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(1)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(2)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	          <core-animation-keyframe>
+	            <core-animation-prop name="transform" value="scale(1)">
+	            </core-animation-prop>
+	          </core-animation-keyframe>
+	        </core-animation>
+	      </core-animation-group>
+	    <label class="load-text">Cours</label>
+	    <input type="file" class="load-file" id="load-file-cours" on-change="{{fireCoursClick}}"/>
+	    </div>
+    </div>
+    </div>
+  </template>
+  <script>
+	Polymer('my-statut-button-load',{
+		
+		imageClick: function(e, detail, sender) {
+			var player;
+			var t = e.target;
+  			var a = this.shadowRoot.querySelector('core-animation,core-animation-group');
+  			var icon = this.shadowRoot.querySelector('#target-image');
+  			a.target = icon;
+		    player = a.play();
+		    
+		    var input = this.shadowRoot.querySelector('#load-file-image');
+		    input.click();
+    	},
+    	
+    	fireImageClick: function(e, detail, sender) {
+    		
+    		this.fire('core-signal', {name: "attach-image", data: sender.files[0]});
+    	},
+    	
+    	videoClick: function(e, detail, sender) {
+			
+			var player;
+			var t = e.target;
+  			var a = this.shadowRoot.querySelector('core-animation,core-animation-group');
+  			var icon = this.shadowRoot.querySelector('#target-vide');
+  			a.target = icon;
+		    player = a.play();
+		    
+		    var input = this.shadowRoot.querySelector('#load-file-video');
+		    input.click();
+    	},
+    	
+    	fireVideoClick: function(e, detail, sender) {
+    		
+    		this.fire('core-signal', {name: "attach-video", data: sender.files[0]});
+    	},
+    	
+    	courClick: function(e, detail, sender) {
+			
+			var player;
+			var t = e.target;
+  			var a = this.shadowRoot.querySelector('core-animation,core-animation-group');
+  			var icon = this.shadowRoot.querySelector('#target-cour');
+  			a.target = icon;
+		    player = a.play();
+		    
+		    var input = this.shadowRoot.querySelector('#load-file-cours');
+		    input.click();
+    	},
+    	
+    	fireCoursClick: function(e, detail, sender) {
+    		
+    		this.fire('core-signal', {name: "attach-cours", data: sender.files[0]});
+    	},
+	});
+  </script>
+</polymer-element>

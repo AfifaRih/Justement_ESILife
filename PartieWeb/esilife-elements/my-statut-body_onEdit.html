@@ -13,18 +13,28 @@
 <polymer-element name="my-statut-body_onEdit">
   <template>
   	<style shim-shadowdom>
-  		
+  		.fileView{
+  			max-width: 80%;
+  			margin: auto;
+  			display: block;
+  			position: relative;
+  		}
     </style>
     
-    <core-signals on-core-signal-annuler="{{annuler}}"></core-signals>
     <core-signals on-core-signal-publier="{{publier}}"></core-signals>
+    
+    <core-signals on-core-signal-attach-image="{{attachImage}}"></core-signals>
+    <core-signals on-core-signal-attach-video="{{attachVideo}}"></core-signals>
+    <core-signals on-core-signal-attach-cours="{{attachCours}}"></core-signals>
     
     <div class="tag-container">
     	<paper-input-decorator label="Exprimez-vous" layout>
-	      <paper-autogrow-textarea>
+	      <paper-autogrow-textarea rows="3">
 	        <textarea id="statut-text"></textarea>
 	      </paper-autogrow-textarea>
 	    </paper-input-decorator>
+	    <div id="fileDisplayArea">
+	    </div>
     </div>
   </template>
   <script>
@@ -33,19 +43,85 @@
         	var textArea = this.shadowRoot.querySelector('#statut-text');
         	textArea.value ="";
         	textArea.setAttribute("placeholder", "Exprimez-vous");
+        	
+        	var contentContainer = this.shadowRoot.querySelector('#fileDisplayArea');
+        	contentContainer.innerHTML = "";
       	},
       	
       	publier: function(e, detail, sender) {
       		
       		var textArea = this.shadowRoot.querySelector('#statut-text');
+      		var content = this.shadowRoot.querySelector('#fileDisplayArea').firstChild;
+      		
       		var scope = angular.element(document.getElementById(('controller'))).scope();
-      		alert(textArea.value );
       		scope.$apply(function () {
-		    	scope.publier(textArea.value );
+		    	scope.publier(textArea.value, content.src);
 		    });
-      		//this.fire('core-signal', {name: "publier-statut", data: textArea.value});
       		this.annuler();
       	},
+      	
+      	attachImage: function (e, detail, sender) {
+			var imageType = /image.*/;
+			var fileDisplayArea = this.shadowRoot.querySelector('#fileDisplayArea');
+			
+			// Create a new image.
+		    var img = new Image();
+		    img.className = "fileView";
+		    
+			if (detail.type.match(imageType)) {
+			  var reader = new FileReader();
+			
+			  reader.onload = function(e) {
+			    fileDisplayArea.innerHTML = "";
+			
+			    // Set the img src property using the data URL.
+			    img.src = reader.result;
+			    // Add the image to the page.
+			    fileDisplayArea.appendChild(img);
+			  }
+			
+			  reader.readAsDataURL(detail); 
+			} else {
+				alert('Format du fichier non supportée !');
+			  	fileDisplayArea.innerHTML = "";
+			}
+		},
+		
+		attachVideo: function (e, detail, sender) {
+			
+			var videoType = /video.*/;
+			var fileDisplayArea = this.shadowRoot.querySelector('#fileDisplayArea');
+			
+			// Create a new video.
+		    var video = document.createElement('video');
+			
+			if (detail.type.match(videoType)) {
+			  var reader = new FileReader();
+			
+			  reader.onload = function(e) {
+			    fileDisplayArea.innerHTML = "";
+			
+				video.className = "fileView";
+			    video.src = reader.result;
+			    video.controls = true;
+			    
+			    // Add the image to the page.
+		      	fileDisplayArea.appendChild(video);
+			    
+			  }
+			  
+			  reader.readAsDataURL(detail); 
+			} else {
+				alert('Format du fichier non supportée !');
+			  	fileDisplayArea.innerHTML = "";
+			}
+		},
+			
+		
+		attachCours: function (e, detail, sender) {
+			alert(detail);
+		},
+		
 	});
   </script>
 </polymer-element>
