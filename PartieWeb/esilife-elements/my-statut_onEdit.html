@@ -1,0 +1,41 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/paper-shadow/paper-shadow.html" rel="import">
+
+<link rel="import" href="my-statut-footer_onEdit.html"/>
+<link rel="import" href="my-statut-header_onEdit.html"/>
+<link rel="import" href="my-statut-body_onEdit.html"/>
+
+<polymer-element name="my-statut_onEdit" attributes="statut">
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			padding: 0.5em 0.3em;
+  			background-color: #FFFFFF;
+  		}
+  		.body{
+  			padding: 0.2em;
+  		}
+    </style>
+    
+    <core-signals on-core-signal-publier-statut="{{publier}}"></core-signals>
+    
+    <paper-shadow class="card tag-container" z="1" id="container">
+  		<my-statut-header_onEdit class="header">
+  			</my-statut-header_onEdit>
+	    <my-statut-body_onEdit class="body">
+	    	</my-statut-body_onEdit>
+	    <my-statut-footer_onEdit class="footer">
+	    	</my-statut-footer_onEdit>
+    </aper-shadow>
+  </template>
+  <script>
+	Polymer('my-statut_onEdit', {
+		statut: {},
+		
+		publier: function(e, detail, sender) {
+      		alert(detail);
+      	}
+	});
+  </script>
+</polymer-element>

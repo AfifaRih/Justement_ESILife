@@ -1,0 +1,40 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<link href="../components/font-roboto/roboto.html" rel="import">
+<link href="../components/paper-input/paper-autogrow-textarea.html" rel="import">
+<link href="../components/paper-input/paper-input-decorator.html" rel="import">
+<link href="../components/paper-input/paper-input.html" rel="import">
+<link href="../components/paper-input/paper-char-counter.html" rel="import">
+<link rel="import" href="my-like-button.html"/>
+
+<polymer-element name="my-statut-footer_onView" attributes="like nbrLike">
+  <template>
+  	<style shim-shadowdom>
+  		.stat{
+  			background-color: rgba(0,0,0,0.1);
+  			padding: 0.2em 0.5em;
+  			font-size: 12px;
+  		}
+    </style>
+    <div class="tag-container">
+    	<div>
+	    	<my-like-button like='{{like}}'></my-like-button>
+	    	<!--paper-input-decorator label="Ecrire un commentaire">
+		      <paper-autogrow-textarea>
+		        <textarea></textarea>
+		      </paper-autogrow-textarea>
+		    </paper-input-decorator-->
+	    </div>
+	    <div class="stat">
+	    	<label>{{nbrLike}} Personnes aiment ça.</label>
+	    </div>
+    </div>
+  </template>
+  <script>
+	Polymer('my-statut-footer_onView',{
+		like: false,
+		nbrLike: 0,
+	});
+  </script>
+</polymer-element>

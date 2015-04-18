@@ -1,0 +1,33 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<link href="../components/font-roboto/roboto.html" rel="import">
+<link href="../components/core-header-panel/core-header-panel.html" rel="import">
+
+<polymer-element name="my-statut-header_onView" attributes='userName datePub'>
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			color: blue;
+  		}
+  		.init{
+  			margin: 0;
+  			padding: 0;
+  		}
+  		.userName{
+  			font-size: 14px;
+  			
+  		}
+		.date{
+  			font-size: 10px;
+  		}
+    </style>
+    <div class="tag-container">
+    	<h1 class="userName init">{{userName}}</h1>
+    	<h2 class="date init">{{datePub}}</h2>
+    </div>
+  </template>
+  <script>
+	Polymer();
+  </script>
+</polymer-element>

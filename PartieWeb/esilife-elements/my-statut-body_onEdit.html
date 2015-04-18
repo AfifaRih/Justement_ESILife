@@ -1,0 +1,51 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<link href="../components/font-roboto/roboto.html" rel="import">
+<link href="../components/paper-input/paper-autogrow-textarea.html" rel="import">
+<link href="../components/paper-input/paper-input-decorator.html" rel="import">
+<link href="../components/paper-input/paper-input.html" rel="import">
+<link href="../components/paper-input/paper-char-counter.html" rel="import">
+<link rel="import" href="../components/core-signals/core-signals.html">
+  
+<link rel="import" href="my-like-button.html"/>
+
+<polymer-element name="my-statut-body_onEdit">
+  <template>
+  	<style shim-shadowdom>
+  		
+    </style>
+    
+    <core-signals on-core-signal-annuler="{{annuler}}"></core-signals>
+    <core-signals on-core-signal-publier="{{publier}}"></core-signals>
+    
+    <div class="tag-container">
+    	<paper-input-decorator label="Exprimez-vous" layout>
+	      <paper-autogrow-textarea>
+	        <textarea id="statut-text"></textarea>
+	      </paper-autogrow-textarea>
+	    </paper-input-decorator>
+    </div>
+  </template>
+  <script>
+	Polymer('my-statut-body_onEdit', {
+		annuler: function(e, detail, sender) {
+        	var textArea = this.shadowRoot.querySelector('#statut-text');
+        	textArea.value ="";
+        	textArea.setAttribute("placeholder", "Exprimez-vous");
+      	},
+      	
+      	publier: function(e, detail, sender) {
+      		
+      		var textArea = this.shadowRoot.querySelector('#statut-text');
+      		var scope = angular.element(document.getElementById(('controller'))).scope();
+      		alert(textArea.value );
+      		scope.$apply(function () {
+		    	scope.publier(textArea.value );
+		    });
+      		//this.fire('core-signal', {name: "publier-statut", data: textArea.value});
+      		this.annuler();
+      	},
+	});
+  </script>
+</polymer-element>
