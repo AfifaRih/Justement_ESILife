@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 
-@DatabaseTable(tableName = "Utilisateur")
+@DatabaseTable(tableName = "utilisateur")
 public class Utilisateur {
 	@DatabaseField(id=true,columnName=COLUMN_USER_ID)
 	private int cle_user;

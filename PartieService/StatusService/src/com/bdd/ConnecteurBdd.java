@@ -9,15 +9,15 @@ import com.j256.ormlite.support.ConnectionSource;
 
 public class ConnecteurBdd {
 	static ConnectionSource connect;
-	public static String urlMysql="jdbc:mysql://localhost:3306/dlala";
+	/*public static String urlMysql="jdbc:mysql://localhost:3306/dlala";
 	public static String userMysql="root";
 	public static String passwordMysql="a1551993";
-	public static String driverMysql="com.mysql.jdbc.Driver";
+	public static String driverMysql="com.mysql.jdbc.Driver";*/
 	public static String urlOracle="jdbc:oracle:thin:@localhost:1521/XE";
-	public static String userOracle="esilifeuser";
-	public static String passwordOracle="esilife1062906";
-	public static String driverOracle="oracle.jdbc.driver.OracleDriver";
-	public static final boolean test=true;
+	public static String userOracle="System";//"esilifeuser";
+	public static String passwordOracle="oracle";//"esilife1062906";
+	public static String driverOracle="oracle.jdbc.OracleDriver";
+	public static final boolean test=false;
 	
 	private ConnecteurBdd(){
 		
@@ -33,24 +33,24 @@ public class ConnecteurBdd {
 		return connect;
 	}
 	public static String url(){
-		if(test){
+		/*if(test){
 			return urlMysql;
-		}else{
+		}else{*/
 			return urlOracle;
-		}
+		//}
 	}
 	public static String user(){
-		if(test){
+		/*if(test){
 			return userMysql;
-		}else{
+		}else{*/
 			return userOracle;
-		}
+		//}
 	}
 	public static String password(){
-		if(test){
+		/*if(test){
 			return passwordMysql;
-		}else{
+		}else{*/
 			return passwordOracle;
-		}
+		//}
 	}
 }

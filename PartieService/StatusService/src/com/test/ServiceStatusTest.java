@@ -28,7 +28,7 @@ public class ServiceStatusTest {
 	public void testReturnTitle() {
 		ServiceStatus s=new ServiceStatus();
 		String JsonPacketSimule="{\"status\":\"test\",\"date_modification\":\"2/2/2002\",\"date_publication\":\"1/1/2001\",id_user:1}";
-		s.returnTitle(JsonPacketSimule);
+		s.posterStatus(null, JsonPacketSimule);
 		ConnectionSource connexionSource;
 		try {
 			connexionSource = new JdbcConnectionSource(ConnecteurBdd.url(),ConnecteurBdd.user(),ConnecteurBdd.password());
@@ -40,7 +40,7 @@ public class ServiceStatusTest {
 			
 			java.util.List<Contenu> c=daoContenu.queryForFieldValues(tableValeurs);
 			if(c.size()!=0){
-				daoContenu.delete(s.getConetenu(new JSONObject(JsonPacketSimule)));
+				daoContenu.delete(s.getConetenu(new JSONObject(JsonPacketSimule), null));
 			}
 			assertFalse("ajout d'objet ne fonctionne pas correctement",c.size()==0);
 			
@@ -60,7 +60,7 @@ public class ServiceStatusTest {
 		ServiceStatus s=new ServiceStatus();
 		String JsonPacketSimule="{\"status\":\"test\",\"date_modification\":\"2/2/2002\",\"date_publication\":\"1/1/2001\",id_user:1}";
 		try {
-			Contenu c=s.getConetenu(new JSONObject(JsonPacketSimule));
+			Contenu c=s.getConetenu(new JSONObject(JsonPacketSimule), null);
 			assertTrue("transformation en objet contenu erroné",c.getContenu_date_modification().equals(new Date("2/2/2002")) && c.getContenu_date_publication().equals(new Date("1/1/2001")) && c.getContenu_text().compareTo("test")==0);
 		} catch (JSONException e) {
 			fail("traduction en json object ne fonctionne pas");

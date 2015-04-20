@@ -23,19 +23,19 @@ public class Contenu {
 	public static final String COLUMN_DATE_MODIFICATION="contenu_date_modification";
 	public static final String COLUMN_CONTENU_TEXT="contenu_text";
 	public static final String COLUMN_USER_CLE="utilisateur_cle";
-	public static final String COLUMN_CONTENU_CONTENU="contenu_contenu";
+	public static final String COLUMN_CONTENU_CONTENU="contenu_binaire";
 	public static final String COLUMN_CONTENU_TYPE="contenu_type";
 	public static final String COLUMN_CONTENU_ACCEPTER="contenu_accepter";
 	
-	@DatabaseField(id=true,columnName=COLUMN_CONTENU_CLE)
+	@DatabaseField(id=true,canBeNull=false,columnName=COLUMN_CONTENU_CLE)
 	private int contenu_cle;
 	@DatabaseField(canBeNull=false,columnName=COLUMN_DATE_PUBLICATION)
 	private Date contenu_date_publication;
-	@DatabaseField(canBeNull=false,columnName=COLUMN_DATE_MODIFICATION)
+	@DatabaseField(canBeNull=true,columnName=COLUMN_DATE_MODIFICATION)
 	private Date contenu_date_modification;
 	@DatabaseField(canBeNull=false,columnName=COLUMN_CONTENU_TEXT)
 	private String contenu_text;
-	@DatabaseField(canBeNull=false,columnName=COLUMN_USER_CLE)
+	@DatabaseField(canBeNull=false,columnName=COLUMN_USER_CLE,foreign=true)
 	private int cle_utilisateur;
 	@DatabaseField(columnName=COLUMN_CONTENU_CONTENU, dataType=DataType.BYTE_ARRAY)
 	private byte[] contenu_binaire;
@@ -46,17 +46,7 @@ public class Contenu {
 	public boolean isContenu_accepter() {
 		return contenu_accepter;
 	}
-	public static byte[] serialize(Object obj) throws IOException {
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        ObjectOutputStream o = new ObjectOutputStream(b);
-        o.writeObject(obj);
-        return b.toByteArray();
-    }
-	public static Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream b = new ByteArrayInputStream(bytes);
-        ObjectInputStream o = new ObjectInputStream(b);
-        return o.readObject();
-    }
+
 	public Contenu(Date contenu_date_publication,
 			Date contenu_date_modification, String contenu_text,
 			int cle_utilisateur, byte[] contenu_binaire, String contenu_type,
