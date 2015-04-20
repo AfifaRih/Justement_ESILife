@@ -13,6 +13,7 @@ drop table administratif;
 drop table enseignant;
 drop table contenu;
 drop table utilisateur_contenu_aimer;
+drop table utilisateur_contenu_commenter;
 drop sequence "utilisateur_cle";
 drop sequence "contenu_cle";
 drop sequence "utilisateur_contenu_aimer_cle";
@@ -110,5 +111,22 @@ create table utilisateur_contenu_aimer
 GRANT SELECT, INSERT, UPDATE, DELETE ON utilisateur_contenu_aimer TO esilifeuser;
 
 Create sequence "utilisateur_contenu_aimer_cle" start with 1
+increment by 1
+minvalue 1;
+
+
+create table utilisateur_contenu_commenter
+(
+  "commenter_cle" integer not null,
+  "utilisateur_fk_cle" integer not null,
+  "contenu_fk_cle" integer not null,
+  "commenter_text" varchar(100) not null ,
+  constraint fk_commenter_contenu     FOREIGN KEY ("contenu_fk_cle")           REFERENCES contenu("contenu_cle"),
+  constraint fk_commenter_utilisateur FOREIGN KEY ("utilisateur_fk_cle") REFERENCES utilisateur("utilisateur_cle"),
+  primary key("commenter_cle")
+);
+GRANT SELECT, INSERT, UPDATE, DELETE ON utilisateur_contenu_aimer TO esilifeuser;
+
+Create sequence "commenter_cle" start with 1
 increment by 1
 minvalue 1;
