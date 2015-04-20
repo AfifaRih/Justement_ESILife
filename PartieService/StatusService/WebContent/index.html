@@ -22,5 +22,17 @@
 		<input type="date" id="date_modification" />
 		</p>
 	</form>
+	
+	<form  action="#" id="post_upload" name="post_upload" onsubmit="upload();">
+		<input type="file" id="fichierUpload"/>
+		<input  type="submit" value="banana split"/>
+	</form>
+	<form action="api/test/upload" method="post" enctype="multipart/form-data">	 
+	       <p>
+	        Select a file : <input type="file" name="file" size="50" />
+	       </p>
+	 
+	       <input type="submit" value="Upload It" />
+	    </form>
 </body>
 </html>

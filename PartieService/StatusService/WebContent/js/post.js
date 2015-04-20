@@ -57,3 +57,28 @@ $(document).ready(function() {
     	$.ajax(ajaxObj);
     }
 });
+
+
+
+function upload(){
+	var XHR = new XMLHttpRequest();
+	var FD  = new FormData();
+	var jsObj = {id_user:1,id_contenu:"chalalalallalallalalal"};
+	  // We define what will happen if the data are successfully sent
+	  XHR.addEventListener('load', function(event) {
+	    alert('Yeah! Data sent and response loaded.');
+	  });
+
+	  // We define what will happen in case of error
+	  XHR.addEventListener('error', function(event) {
+	    alert('Oups! Something goes wrong.');
+	  });
+
+	  // We setup our request
+	  FD.append("file",document.getElementById("fichierUpload").files[0]);
+	  FD.append("status",JSON.stringify(jsObj));
+	  XHR.open('POST', 'http://localhost:8080/StatusService/api/test/upload');	  
+	  // We just send our FormData object, HTTP headers are set automatically
+	  XHR.send(FD);
+}
+

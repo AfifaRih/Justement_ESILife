@@ -1,12 +1,9 @@
 package com.service;
 
 import java.sql.SQLException;
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -16,12 +13,8 @@ import org.codehaus.jettison.json.JSONObject;
 import com.bdd.ConnecteurBdd;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.ormObjects.AimerContenu;
-import com.ormObjects.Contenu;
 import com.ormObjects.Utilisateur;
 
 
