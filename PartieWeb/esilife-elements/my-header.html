@@ -13,18 +13,20 @@
   <link href="../components/paper-dropdown/paper-dropdown.html" rel="import">
   <link href="../components/paper-icon-button/paper-icon-button.html" rel="import">
   <link href="../components/core-item/core-item.html" rel="import">
-<link href="../components/paper-fab/paper-fab.html" rel="import">
+  <link href="../components/paper-fab/paper-fab.html" rel="import">
   <link href="../components/paper-menu-button/paper-menu-button.html" rel="import">
 
 <polymer-element name="my-header">
   <template>
   	<style shim-shadowdom>
   		.header{
-  			padding: 0 4em;
+  			height: 100px;
   		}
   		paper-tabs, core-toolbar, .header {
-		  background-color: #00bcd4;
-		  color: #fff;
+		  background-color: #FFFFFF;
+		  font-family: 'Roboto-Light';
+		  font-weight: bold;
+		  color: #512DA8;
 		}
 		
 		paper-tabs, .header {
@@ -36,7 +38,7 @@
 		}
 		
 		paper-tabs[noink][nobar] paper-tab.core-selected {
-		  color: #ffff8d;
+		  color: #512DA8;
 		}
 		
 		paper-tabs.transparent-teal {
@@ -70,22 +72,14 @@
 	    }
 
   	</style>
-  	<div horizontal layout class="header">
-	  <div flex>
+  	<div vertical layout class="header">
+	  <div flex one style="background-color: #512DA8">
+  			
+	  </div >
+	  <div two flex style="padding: 0 4em;"> 
 	  	<core-toolbar horizontal end-justified layout>
-		  	<div class="bottom" flex></div>
-		  	<paper-menu-button layout>
-		  		<paper-fab mini icon="perm-identity" title="done"></paper-fab>
-		        <div>
-			        <paper-dropdown class="dropdown" halign="right">
-			          <core-menu  style="margin: 0">
-			            <core-item label="Déconnexion"></core-item>
-			          </core-menu>
-			        </paper-dropdown>
-		        </div>
-		    </paper-menu-button>
 		    <paper-tabs selected="0" class="bottom" self-end style="margin-right: 14%">
-			  	<paper-tab class="menuItem">Accueil</paper-tab>
+			  	<paper-tab class="menuItem">ACCEUIL</paper-tab>
 		    </paper-tabs>
 		  </core-toolbar>
 	  </div>

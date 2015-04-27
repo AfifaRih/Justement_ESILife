@@ -14,7 +14,7 @@
 	      font-size: 32px;
 	      -webkit-transform: translateZ(0);
 	      transform: translateZ(0);
-	      color: {{like ? 'red' : 'blue'}};
+	      color: {{like ? '#512DA8':'#a9a9a9' }};
 	      cursor: pointer;
 	    }
   	</style>
@@ -62,8 +62,9 @@
   			var a = this.shadowRoot.querySelector('core-animation,core-animation-group');
   			var icon = this.shadowRoot.querySelector('#target');
 		    a.target = icon;
-		    player = a.play();
 		    this.like = !this.like;
+		    player = a.play();
+		    
     	},
 	});
   </script>
