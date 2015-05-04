@@ -33,6 +33,9 @@ Create sequence "utilisateur_cle" start with 1
 increment by 1
 minvalue 1;
 
+Create sequence "contenu_cle" start with 1
+increment by 1
+minvalue 1;
 
 create table etudiant_affilie
 (
@@ -40,7 +43,7 @@ create table etudiant_affilie
     	"etudiant_affilie_annee" integer not null,
     	"etudiant_affilie_section" integer not null,
     	"etudiant_affilie_specialite" integer not null,
-	primary key ("utilisateur_cle")  
+	primary key ("utilisateur_cle")
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON etudiant_affilie TO esilifeuser;
@@ -49,7 +52,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON etudiant_affilie TO esilifeuser;
 create table moderateur
 (
 	"utilisateur_cle"  integer not null ,
- 	primary key ("utilisateur_cle")    
+ 	primary key ("utilisateur_cle")
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON moderateur TO esilifeuser;
@@ -57,7 +60,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON moderateur TO esilifeuser;
 create table administratif
 (
 	"utilisateur_cle"  integer not null ,
-	 primary key ("utilisateur_cle")    
+	 primary key ("utilisateur_cle")
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON administratif TO esilifeuser;
@@ -66,28 +69,25 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON administratif TO esilifeuser;
 create table enseignant
 (
 	"utilisateur_cle"  integer not null ,
-    	primary key ("utilisateur_cle")    
+    	primary key ("utilisateur_cle")
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON enseignant TO esilifeuser;
 
 
-create table contenu
-(
-	 "contenu_cle"  integer not null ,
-    	 "contenu_date_publication" date not null,
-    	 "contenu_date_modification" date default null,
-    	 "contenu_text" varchar(1000) not null,
-    	 "utilisateur_cle" integer not null,
-    	 "contenu_binaire" bfile default null,
-    	 "contenu_type" varchar(20) not null,
-	 "contenu_accepter"  integer default 0 not null,
-  	 constraint "date_publication_modification" 
-      	 check("contenu_date_publication" <= "contenu_date_modification"),
-	 constraint fk_PerOrders FOREIGN KEY ("utilisateur_cle")
-	 REFERENCES utilisateur("utilisateur_cle"),
-    	 primary key ("contenu_cle")    
-);
+CREATE TABLE  "CONTENU"
+   (	"contenu_cle" NUMBER(*,0) NOT NULL DISABLE,
+	"contenu_date_publication" VARCHAR2(25),
+	"contenu_date_modification" VARCHAR2(25) DEFAULT null,
+	"contenu_text" VARCHAR2(1000) NOT NULL DISABLE,
+	"utilisateur_cle" NUMBER(*,0) NOT NULL DISABLE,
+	"contenu_type" VARCHAR2(20) NOT NULL DISABLE,
+	"contenu_accepter" NUMBER(*,0) DEFAULT 0 NOT NULL DISABLE,
+	"contenu_binaire" BLOB,
+	 PRIMARY KEY ("contenu_cle") ENABLE,
+	 CONSTRAINT "FK_PERORDERS" FOREIGN KEY ("utilisateur_cle")
+	  REFERENCES  "UTILISATEUR" ("utilisateur_cle") ENABLE
+  );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON contenu TO esilifeuser;
 
@@ -104,7 +104,7 @@ create table utilisateur_contenu_aimer
 	REFERENCES utilisateur("utilisateur_cle"),
 	constraint fk_PerOrders3 FOREIGN KEY ("contenu_fk_cle")
 	REFERENCES contenu("contenu_cle"),
-	primary key ("utilisateur_contenu_aimer_cle") 
+	primary key ("utilisateur_contenu_aimer_cle")
 );
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON utilisateur_contenu_aimer TO esilifeuser;
