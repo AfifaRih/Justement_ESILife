@@ -1,5 +1,9 @@
 package com.service;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,21 +16,18 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-//import org.apache.coyote.spdy.SpdyProxyProtocol.TomcatJioHandler;
+
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.bdd.ConnecteurBdd;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.ormObjects.AimerContenu;
 import com.ormObjects.Contenu;
@@ -59,8 +60,23 @@ public class ServiceMur {
 			for(int i=0;i<resultatRequete.size();i++){
 				tabJsonObjects.add(new JSONObject(JsonMapper.writeValueAsString(statusConvert(resultatRequete.get(i)))));
 			}
-			JSONArray tableauAEnvoye=new JSONArray(tabJsonObjects);
-			return Response.ok(tableauAEnvoye).build();
+
+			FileInputStream fileInputStream=new FileInputStream(new File("/home/afou/Pictures/index.jpeg"));
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+			int nRead;
+			byte[] data = new byte[16384];
+
+			while ((nRead = fileInputStream.read(data, 0, data.length)) != -1) {
+			  buffer.write(data, 0, nRead);
+			}
+
+			buffer.flush();
+
+			byte[] tab=buffer.toByteArray();
+			
+			//return Response.ok(tableauAEnvoye).build();
+			return Response.ok(tab).build();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,14 +95,13 @@ public class ServiceMur {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 	}
+	@SuppressWarnings("deprecation")
 	private StatusEnvoye  statusConvert(Contenu c){
 		StatusEnvoye s=new StatusEnvoye();
 		s.setContentText(c.getContenu_text());
 		s.setDatePub(c.getContenu_date_publication().toGMTString());
 		s.setLike(checkLike(c.getCle_utilisateur(),c.getContenu_cle()));
 		s.setNbrLike(getNbLike(c.getContenu_cle()));
-		Utilisateur u=getUser(c.getCle_utilisateur());
-		String l=getUser(c.getCle_utilisateur()).getCompte_user();
 		s.setUserName(getUser(c.getCle_utilisateur()).getCompte_user());
 		return s;
 	}

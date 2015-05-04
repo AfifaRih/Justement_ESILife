@@ -33,7 +33,7 @@ public class ServiceModerer {
 			Dao<Contenu, Integer> daoContenu=DaoManager.createDao(connexionSource, Contenu.class);
 			if(paquetRecu.getBoolean("accepter")){
 				Contenu c=daoContenu.queryForId(paquetRecu.getInt("contenu_id"));
-				c.setContenu_accepter(true);
+				c.setContenu_accepterBoolean(true);
 				int resultat=daoContenu.update(c);
 				if(resultat!=1){
 					return Response.status(Response.Status.BAD_REQUEST).build();

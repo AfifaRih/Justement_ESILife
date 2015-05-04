@@ -2,17 +2,12 @@ package com.ormObjects;
 
 
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import com.mysql.jdbc.Blob;
+
 
 
 @DatabaseTable(tableName = "contenu")
@@ -27,30 +22,31 @@ public class Contenu {
 	public static final String COLUMN_CONTENU_TYPE="contenu_type";
 	public static final String COLUMN_CONTENU_ACCEPTER="contenu_accepter";
 	
-	@DatabaseField(id=true,canBeNull=false,columnName=COLUMN_CONTENU_CLE)
+	@DatabaseField(generatedIdSequence="contenu_cle",canBeNull=false,columnName=COLUMN_CONTENU_CLE)
 	private int contenu_cle;
-	@DatabaseField(canBeNull=false,columnName=COLUMN_DATE_PUBLICATION)
+	@DatabaseField(canBeNull=false,columnName=COLUMN_DATE_PUBLICATION,dataType=DataType.DATE_STRING,format="DD-MM-YYYY HH:MM:SS")
 	private Date contenu_date_publication;
-	@DatabaseField(canBeNull=true,columnName=COLUMN_DATE_MODIFICATION)
+	@DatabaseField(canBeNull=true,columnName=COLUMN_DATE_MODIFICATION,dataType=DataType.DATE_STRING,format="DD-MM-YYYY HH:MM:SS")
 	private Date contenu_date_modification;
 	@DatabaseField(canBeNull=false,columnName=COLUMN_CONTENU_TEXT)
 	private String contenu_text;
-	@DatabaseField(canBeNull=false,columnName=COLUMN_USER_CLE,foreign=true)
+	@DatabaseField(canBeNull=false,columnName=COLUMN_USER_CLE)
 	private int cle_utilisateur;
-	@DatabaseField(columnName=COLUMN_CONTENU_CONTENU, dataType=DataType.BYTE_ARRAY)
+	@DatabaseField(columnName=COLUMN_CONTENU_CONTENU, dataType=DataType.BYTE_ARRAY,canBeNull=true)
 	private byte[] contenu_binaire;
 	@DatabaseField(columnName=COLUMN_CONTENU_TYPE)
 	private String contenu_type;
 	@DatabaseField(canBeNull=false,columnName=COLUMN_CONTENU_ACCEPTER)
-	private boolean contenu_accepter;
-	public boolean isContenu_accepter() {
+	private byte contenu_accepter;
+	
+	public byte isContenu_accepter() {
 		return contenu_accepter;
 	}
 
 	public Contenu(Date contenu_date_publication,
 			Date contenu_date_modification, String contenu_text,
 			int cle_utilisateur, byte[] contenu_binaire, String contenu_type,
-			boolean contenu_accepter) {
+			byte contenu_accepter) {
 		
 		this.contenu_date_publication = contenu_date_publication;
 		this.contenu_date_modification = contenu_date_modification;
@@ -61,7 +57,7 @@ public class Contenu {
 		this.contenu_accepter = contenu_accepter;
 	}
 
-	public void setContenu_accepter(boolean contenu_accepter) {
+	public void setContenu_accepter(byte contenu_accepter) {
 		this.contenu_accepter = contenu_accepter;
 	}
 
@@ -85,6 +81,19 @@ public class Contenu {
 		
 	}
 	
+	public Contenu(Date contenu_date_publication,
+			Date contenu_date_modification, String contenu_text,
+			int cle_utilisateur, byte[] contenu_binaire,
+			String contenu_type, boolean b) {
+		this.contenu_date_publication = contenu_date_publication;
+		this.contenu_date_modification = contenu_date_modification;
+		this.contenu_text = contenu_text;
+		this.cle_utilisateur = cle_utilisateur;
+		this.contenu_binaire = contenu_binaire;
+		this.contenu_type = contenu_type;
+		setContenu_accepterBoolean(b);
+	}
+
 	/*************** getters & setters***************/
 	public int getContenu_cle() {
 		return contenu_cle;
@@ -117,6 +126,21 @@ public class Contenu {
 
 	public void setCle_utilisateur(int cle_utilisateur) {
 		this.cle_utilisateur = cle_utilisateur;
+	}
+
+	public void setContenu_accepterBoolean(boolean b) {
+		if(b){
+			contenu_accepter=1;
+		}else contenu_accepter=0;
+		
+	}
+	
+	public boolean getContenu_accepterBoolean(){
+		if(contenu_accepter==0){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	
