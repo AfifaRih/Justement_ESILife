@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tv_red">#EF5350</color>
+    <color name="tv_white">#fff</color>
+    <color name="tv_black">#242424</color>
+    <color name="tv_dark_red">#F44336</color>
+    <color name="primary">#009688</color>
+    <color name="primary_dark">#00796B</color>
+    <color name="primary_light">#B2DFDB</color>
+    <color name="accent">#009688</color>
+    <color name="text_icon">#FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#727272</color>
+    <color name="divider">#B6B6B6</color>
+
+
+
+</resources>

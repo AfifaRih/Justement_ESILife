@@ -42,7 +42,7 @@ polyfill-next-selector { content: '.core-narrow #tabsContainer.scrollable :host 
   right: 0;
   bottom: 0;
   left: 0;
-  color: #ffff8d;
+  color: #512DA8;
   pointer-events: none;
 }
 

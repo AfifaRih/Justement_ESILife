@@ -2,6 +2,7 @@ body, html{
   width: 100%;
   height: 100%;
   margin: 0;
+  background-color: #e9eaed;
 }
 
 .bodyContainer{
@@ -11,4 +12,9 @@ body, html{
 
 .statut{
 	margin: 0.05px;
+}
+
+@font-face {
+    font-family: "Roboto-Light";
+    src: url(../Roboto/Roboto/Roboto-Light.ttf) format("truetype");
 }

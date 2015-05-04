@@ -51,11 +51,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 #selectionBar {
   position: absolute;
-  height: 2px;
+  height: 5px;
   bottom: 0;
   left: 0;
   width: 0;
-  background-color: #ffff8d;
+  background-color: #512DA8;
   transition: width, left;
 }
 

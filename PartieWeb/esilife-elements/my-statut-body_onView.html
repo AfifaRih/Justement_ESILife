@@ -12,13 +12,48 @@
 <polymer-element name="my-statut-body_onView" attributes="contentText">
   <template>
   	<style shim-shadowdom>
-  		
+  		.fileView{
+  			max-width: 80%;
+  			margin: auto;
+  			display: block;
+  			position: relative;
+  		}
     </style>
-    <div class="tag-container">
+    <div class="tag-container" style="background-color: red; padding: 10px;" on-click='{{clicktest}}'>
     	<span>{{contentText}}</span>
+    	<div id="fileDisplayArea">
+	    </div>
     </div>
   </template>
   <script>
-	Polymer();
+	Polymer('my-statut-body_onView', {
+		contentMedia : "",
+		ready: function() {
+			
+			
+		},
+		
+		clicktest : function(){
+			
+			alert('ready');
+			
+			//change with contentMedia attribute
+      		var scope = angular.element(document.getElementById(('controller'))).scope();
+      		var content = scope.contenu;
+      		
+      		var contentMedia;
+      		var contentImage = /image.*/;
+      		var contentVideo = /video.*/;
+      		
+			if(content.match(contentImage)) contentMedia = new Image();
+			else if(content.match(contentVideo)){
+				contentMedia = document.createElement('video');
+				contentMedia.controls = true;
+			}
+			contentMedia.className = "fileView";
+			contentMedia.src = content;
+			this.shadowRoot.querySelector('#fileDisplayArea').appendChild(contentMedia);
+		},
+	});
   </script>
 </polymer-element>

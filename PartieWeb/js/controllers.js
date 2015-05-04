@@ -2,8 +2,13 @@ var  MurControllers= angular.module('MurControllers', []);
 
 	MurControllers.controller('MurCtrl', ['$scope',
 		function($scope){
-			 $scope.publier = function(text){
-				alert('publier statut' + text);
+			 $scope.contenu = "";	
+			 $scope.publier = function(text, content1){
+			 	$scope.contenu = content1;
+				alert('publier statut' + text + " "+content1);
+				var contentType = /image.*/;
+				if(content1.match(contentType)) alert('true');
+				else alert('false');
 		}
 }]);
 

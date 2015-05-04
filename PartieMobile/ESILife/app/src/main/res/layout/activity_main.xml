@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="xox.tvchannels.MainActivity"
+    android:background="@color/background_material_light"
+    android:padding="0dp">
+
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_floating_material_light"
+        android:clipToPadding="false">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/pager"
+            android:background="@drawable/pager_tab_strip"
+            android:paddingBottom="15dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="4dp"
+            android:layout_margin="0dp"
+            android:textColor="@color/background_material_light"
+            android:focusableInTouchMode="false" />
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>
