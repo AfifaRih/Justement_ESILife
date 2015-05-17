@@ -3,31 +3,89 @@
 <link rel="import" href="../components/paper-button/paper-button.html"/>
 <link href="../components/font-roboto/roboto.html" rel="import">
 <link href="../components/core-header-panel/core-header-panel.html" rel="import">
+<link rel="import" href="../components/paper-dropdown/paper-dropdown.html"/>
+<link rel="import" href="../components/paper-dropdown/x-trigger.html"/>
+<link rel="import" href="../components/paper-item/paper-item.html"/>
+<link rel="import" href="../components/core-signals/core-signals.html">
+<link href="../components/core-icon/core-icon.html" rel="import">
+<link href="../components/core-icons/core-icons.html" rel="import">
 
-<polymer-element name="my-statut-header_onView" attributes='userName datePub'>
+<polymer-element name="my-statut-header_onView" attributes='userName datePub userId'>
   <template>
   	<style shim-shadowdom>
-  		.tag-container{
-  			color: blue;
-  		}
   		.init{
   			margin: 0;
   			padding: 0;
   		}
   		.userName{
-  			font-size: 14px;
-  			
+  			font-size: 16px;
+  			color: #512da8;
+  			font-weight: bold;
   		}
 		.date{
-  			font-size: 10px;
+  			font-size: 12px;
   		}
+  		.no-padding{
+  			padding: 0;
+  		}
+  		.menu{
+  			color: black;
+  		}
+  		.menu *:hover{
+  			background-color: #f4f4f6;
+  		}
+  		.icon{
+  			
+  			color: #512da8;
+  			width: 50px;
+  			height: 50px;
+  			margin-right: 0.5em;
+  		}
+  		
     </style>
-    <div class="tag-container">
-    	<h1 class="userName init">{{userName}}</h1>
-    	<h2 class="date init">{{datePub}}</h2>
+    <div layout horizontal class="tag-container">
+    	<div flex layout horizontal>
+    		<div>
+    			<core-icon icon="account-circle" class="icon"></core-icon>
+    		</div>
+    		<div style="margin: auto 0">
+		    	<span class="userName">{{userName}}</span></br>
+		    	<span class="date">{{datePub}}</span>
+	    	</div>
+    	</div>
+    	<div>
+		  <x-trigger icon="expand-more" style="color: #a9a9a9">
+	        <paper-dropdown halign="right">
+	          <div class="menu">
+	            <paper-item on-click='{{modifierClick}}'>Modifier</paper-item>
+	            <paper-item on-click='{{supprimerClick}}'>Supprimer</paper-item>
+	            <paper-item on-click='{{suivreClick}}'>Suivre {{userName}}</paper-item>
+	          </div>
+	        </paper-dropdown>
+	      </x-trigger>
+    	</div>
     </div>
   </template>
   <script>
-	Polymer();
+	Polymer("my-statut-header_onView", {
+		userId: 0,
+		
+		modifierClick: function(e, detail, sender){
+			this.fire('modifier', {message: "message"});
+		},
+		
+		supprimerClick: function(e, detail, sender){
+			this.fire('supprimer', {message: "message"});
+		},
+		
+		suivreClick: function(e, detail, sender){
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+			var userId = this.userId;
+      		scope.$apply(function () {
+		    	scope.suivre(userId);
+		    });
+		},
+		
+	});
   </script>
 </polymer-element>

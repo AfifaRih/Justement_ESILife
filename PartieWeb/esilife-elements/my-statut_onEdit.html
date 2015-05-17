@@ -6,7 +6,10 @@
 <link rel="import" href="my-statut-header_onEdit.html"/>
 <link rel="import" href="my-statut-body_onEdit.html"/>
 
-<polymer-element name="my-statut_onEdit" attributes="statut">
+<polymer-element name="my-statut_onEdit" attributes="statut"
+		on-publier='{{publier}}'
+		on-attach-image='{{attach_image}}'
+		on-attach-video='{{attach_video}}'>
   <template>
   	<style shim-shadowdom>
   		.tag-container{
@@ -34,7 +37,18 @@
 		statut: {},
 		
 		publier: function(e, detail, sender) {
-      		alert(detail);
+      		var body = this.shadowRoot.querySelector('my-statut-body_onEdit');
+	  		body.publier();
+      	},
+      	
+      	attach_image: function(e, detail, sender) {
+      		var body = this.shadowRoot.querySelector('my-statut-body_onEdit');
+	  		body.attachImage(e, detail.message, sender);
+      	},
+      	
+      	attach_video: function(e, detail, sender) {
+      		var body = this.shadowRoot.querySelector('my-statut-body_onEdit');
+	  		body.attachVideo(e, detail.message, sender);
       	}
 	});
   </script>

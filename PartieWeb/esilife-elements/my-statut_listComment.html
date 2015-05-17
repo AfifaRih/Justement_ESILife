@@ -1,0 +1,24 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="my-comment.html"/>
+
+<polymer-element name="my-statut_listComment" attributes="content">
+  <template>
+  	<style shim-shadowdom>
+		.tag-container{
+			background-color: #f4f4f6;
+		}
+  	</style>
+  	<div vertical layout class="tag-container">
+  		<template repeat='{{comment in content.list}}'>
+  			<my-comment comment='{{comment}}'></my-comment>
+  			<div style="height: 2px;"></div>
+  		</template>
+	</div>
+  </template>
+  <script>
+	Polymer('my-statut_listComment',{
+		content:{},
+	});
+  </script>
+</polymer-element>

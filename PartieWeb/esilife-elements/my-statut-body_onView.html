@@ -6,11 +6,15 @@
 <link href="../components/paper-input/paper-input-decorator.html" rel="import">
 <link href="../components/paper-input/paper-input.html" rel="import">
 <link href="../components/paper-input/paper-char-counter.html" rel="import">
-  
+<link rel="import" href="../components/core-signals/core-signals.html">
+<link rel="import" href="my-statut_onModif.html">
+ 
 <link rel="import" href="my-like-button.html"/>
 
-<polymer-element name="my-statut-body_onView" attributes="contentText">
-  <template>
+<polymer-element name="my-statut-body_onView" attributes="contentText contentMedia statutId"
+			on-valider='{{valider}}'
+			on-annuler='{{annuler}}'>
+  <template id='template'>
   	<style shim-shadowdom>
   		.fileView{
   			max-width: 80%;
@@ -19,41 +23,95 @@
   			position: relative;
   		}
     </style>
-    <div class="tag-container" style="background-color: red; padding: 10px;" on-click='{{clicktest}}'>
-    	<span>{{contentText}}</span>
+    
+    <div class="tag-container"  on-click='{{click}}'>
+    	<div id="containerText">
+    		<span id="contentText">{{contentText}}</span>
+    	</div>
     	<div id="fileDisplayArea">
 	    </div>
     </div>
   </template>
   <script>
 	Polymer('my-statut-body_onView', {
-		contentMedia : "",
-		ready: function() {
+		contentText: "",
+		contentMedia: new File([""], "filename"),
+		statutId: 0,
+		click : function(){
+			//var scope = angular.element(document.getElementById(('controller'))).scope();
+			//this.contentMedia = scope.file;
+
+			if(this.contentMedia != null){
 			
-			
+				var content, exist = false;
+	      		var contentImage = /image.*/;
+	      		var contentVideo = /video.*/;
+	      		
+				if(this.contentMedia.type.match(contentImage)){
+					
+					alert('image');
+					content = new Image();
+					exist = true;
+				}else if(this.contentMedia.type.match(contentVideo)){
+					
+					alert('video');
+					content = document.createElement('video');
+					content.controls = true;
+					exist = true;
+				}
+				
+				//alert('je suis arrétée là !! ');
+				if (exist){
+					
+					content.className = "fileView";
+					var reader = new FileReader();
+				
+					reader.onload = function(e) {
+					
+					    // Set the img src property using the data URL.
+					    content.src = reader.result;
+					  }
+					  
+					  reader.readAsDataURL(this.contentMedia); 
+					this.shadowRoot.querySelector('#fileDisplayArea').appendChild(content);
+				} else { alert('rien ')}
+			}else { alert('null')}
 		},
 		
-		clicktest : function(){
-			
-			alert('ready');
-			
-			//change with contentMedia attribute
+		
+      	modifier: function(e, detail, sender) {
+      		var contentText = this.shadowRoot.querySelector('#contentText');
+      		var containerText = this.shadowRoot.querySelector('#containerText');
+      		containerText.innerHTML = "<my-statut_onModif id='contentText' content='"+contentText.innerHTML+"' statutId='"+this.statutId+"'></my-statut_onModif>";
+      	},
+      	
+      	annuler: function(e, detail, sender) {
+      		var containerText = this.shadowRoot.querySelector('#containerText');
+      		containerText.innerHTML = "<span id='contentText'>"+this.contentText+"</span>"; 										
+      	},
+      	
+      	valider: function(e, detail, sender) {
+      		var containerText = this.shadowRoot.querySelector('#containerText');
+      		containerText.innerHTML = "<span id='contentText'>"+detail.message+"</span>"; 
+      		var id = this.statutId;
       		var scope = angular.element(document.getElementById(('controller'))).scope();
-      		var content = scope.contenu;
-      		
-      		var contentMedia;
-      		var contentImage = /image.*/;
-      		var contentVideo = /video.*/;
-      		
-			if(content.match(contentImage)) contentMedia = new Image();
-			else if(content.match(contentVideo)){
-				contentMedia = document.createElement('video');
-				contentMedia.controls = true;
-			}
-			contentMedia.className = "fileView";
-			contentMedia.src = content;
-			this.shadowRoot.querySelector('#fileDisplayArea').appendChild(contentMedia);
-		},
+      		scope.$apply(function () {
+		    	scope.modifier(id, detail.message);
+		    });		
+		    						
+      	},
+      	
+      	supprimer: function(e, detail, sender) {
+      		var id = this.statutId;
+      		var scope = angular.element(document.getElementById(('controller'))).scope();
+      		scope.$apply(function () {
+		    	scope.supprimer(id);
+		    });									
+      	},
+      	
+      	heard: function(e, detail, sender) {
+	        alert('heard ');
+	      }
 	});
   </script>
 </polymer-element>

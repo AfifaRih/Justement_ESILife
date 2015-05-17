@@ -1,0 +1,35 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/paper-shadow/paper-shadow.html" rel="import">
+<link href="../components/core-icon/core-icon.html" rel="import">
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-icons/communication-icons.html" rel="import">
+<link href="../components/core-icons/editor-icons.html" rel="import">
+<link href="../components/core-icons/av-icons.html" rel="import">
+<link href="../components/core-icons/image-icons.html" rel="import">
+<link href="../components/core-icons/social-icons.html" rel="import">
+<link href="../components/core-icons/device-icons.html" rel="import">
+
+<polymer-element name="my-listEvent" attributes="">
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			padding: 0.5em 0.3em;
+  			height: 200px;
+  		}
+  		.card{
+  			
+  			background-color: #FFFFFF;
+  		}
+    </style>
+    <paper-shadow class="card" z="1">
+    	<div class="tag-container">
+    	</div>
+    </paper-shadow>
+  </template>
+  <script>
+	Polymer('my-listEvent', {
+		
+	});
+  </script>
+</polymer-element>

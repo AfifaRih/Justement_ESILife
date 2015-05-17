@@ -8,33 +8,47 @@
 <link href="../components/paper-input/paper-char-counter.html" rel="import">
 <link rel="import" href="my-like-button.html"/>
 
-<polymer-element name="my-statut-footer_onView" attributes="like nbrLike">
+<polymer-element name="my-statut-footer_onView" attributes="like nbrLike statutId">
   <template>
   	<style shim-shadowdom>
   		.stat{
-  			background-color: rgba(0,0,0,0.1);
   			padding: 0.2em 0.5em;
   			font-size: 12px;
+  			text-align: right; 
+  			display: inline-block;
+  			color: #a9a9a9;
+	      	font-family: 'Roboto-Light';
   		}
     </style>
     <div class="tag-container">
-    	<div>
-	    	<my-like-button like='{{like}}'></my-like-button>
-	    	<!--paper-input-decorator label="Ecrire un commentaire">
-		      <paper-autogrow-textarea>
-		        <textarea></textarea>
-		      </paper-autogrow-textarea>
-		    </paper-input-decorator-->
+    	<div layout horizontal>
+	    	<my-like-button like='{{like}}' statutId='{{statutId}}'></my-like-button>
+	    	<div flex class="stat">
+		    	<label>{{nbrLike}} J'aime.</label></br>
+		    	<label>{{nbrLike}} Commentaires.</label>
+		    </div>
 	    </div>
-	    <div class="stat">
-	    	<label>{{nbrLike}} Personnes aiment ça.</label>
-	    </div>
+	    <paper-input-decorator label="Ajouter un commentaire" style="width: 100%">
+	      <paper-autogrow-textarea>
+	        <input type="text" style="width: 100%" id='{{statutId}}' onkeypress="commenter(this)"></input>
+	      </paper-autogrow-textarea>
+	    </paper-input-decorator>
     </div>
   </template>
   <script>
 	Polymer('my-statut-footer_onView',{
 		like: false,
 		nbrLike: 0,
+		statutId: 0,
 	});
+	function commenter(e){
+		if(event.keyCode == 13){
+			
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+      		scope.$apply(function () {
+		    	scope.commenter(e.id, e.value);
+		    });
+		} 
+	};
   </script>
 </polymer-element>

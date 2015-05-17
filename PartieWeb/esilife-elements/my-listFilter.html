@@ -1,0 +1,68 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/paper-shadow/paper-shadow.html" rel="import">
+<link href="../components/core-icon/core-icon.html" rel="import">
+<link href="../components/core-icons/core-icons.html" rel="import">
+<link href="../components/core-icons/communication-icons.html" rel="import">
+<link href="../components/core-icons/editor-icons.html" rel="import">
+<link href="../components/core-icons/av-icons.html" rel="import">
+<link href="../components/core-icons/image-icons.html" rel="import">
+<link href="../components/core-icons/social-icons.html" rel="import">
+<link href="../components/core-icons/device-icons.html" rel="import">
+
+<polymer-element name="my-listFilter" attributes="">
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			padding: 0.5em 0.3em;
+  		}
+  		.card{
+  			
+  			background-color: #FFFFFF;
+  		}
+  		.text-item{
+  			vertical-align: middle;
+  			line-height: 25px;
+  		}
+  		.icon-item{
+  			width: 25px;
+  			height: 25px;
+  			color: #512da8;
+  		}
+  		.item{
+  			padding: 0.3em 0;
+  		}
+  		.item:hover{
+  			cursor: pointer;
+  			background-color: #f4f4f6;	
+  		}
+    </style>
+	<div class="tag-container">
+		<div layout horizontal flex class="item">
+			<core-icon flex two icon="thumb-up" class="icon-item"></core-icon>
+			<span flex seven class="text-item" >Filtrer par nombre de j'aime</span>
+		</div>
+		<div layout horizontal flex class="item">
+			<core-icon flex two icon="device:access-time" class="icon-item"></core-icon>
+			<span flex seven class="text-item" >Filtrer par date</span>
+		</div>
+		<div layout horizontal flex class="item">
+			<core-icon flex two icon="social:people" class="icon-item"></core-icon>
+			<span flex seven class="text-item" >Filtrer par suivis</span>
+		</div>
+		<div layout horizontal flex class="item">
+			<core-icon flex two icon="image:style" class="icon-item"></core-icon>
+			<span flex seven class="text-item" >Filtrer par catégorie</span>
+		</div>
+		<div layout horizontal flex class="item">
+			<core-icon flex two icon="view-list" class="icon-item"></core-icon>
+			<span flex seven class="text-item" >Filtres avancés</span>
+		</div>
+	</div>
+  </template>
+  <script>
+	Polymer('my-listFilter', {
+		
+	});
+  </script>
+</polymer-element>

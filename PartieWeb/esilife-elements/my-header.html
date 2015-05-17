@@ -16,11 +16,11 @@
   <link href="../components/paper-fab/paper-fab.html" rel="import">
   <link href="../components/paper-menu-button/paper-menu-button.html" rel="import">
 
-<polymer-element name="my-header">
+<polymer-element name="my-header" attributes="selected">
   <template>
   	<style shim-shadowdom>
   		.header{
-  			height: 100px;
+  			height: 120px;
   		}
   		paper-tabs, core-toolbar, .header {
 		  background-color: #FFFFFF;
@@ -69,17 +69,27 @@
 	    .menuItem{
 	    	width: 140px;
 	    	cursor: pointer;
+	    	height: 30px
+	    }
+	    .link{
+	    	text-decoration: none;
+	    	width: 140px;
+	    	cursor: pointer;
+	    	color: #512DA8;
 	    }
 
   	</style>
   	<div vertical layout class="header">
-	  <div flex one style="background-color: #512DA8">
+	  <div flex three style="background-color: #512DA8">
   			
 	  </div >
-	  <div two flex style="padding: 0 4em;"> 
-	  	<core-toolbar horizontal end-justified layout>
-		    <paper-tabs selected="0" class="bottom" self-end style="margin-right: 14%">
-			  	<paper-tab class="menuItem">ACCEUIL</paper-tab>
+	  <div two flex style="padding: 0 0 0 4em;"> 
+	  	<core-toolbar horizontal end-justified layout style="height: 48px">
+		    <paper-tabs selected='{{selected}}' class="bottom" self-end link>
+			  	<paper-tab class="menuItem"><a href="../index.html" class="link" horizontal center-center layout>ACCEUIL</a></paper-tab>
+		      	<paper-tab class="menuItem"><a href="../agenda.html" class="link" horizontal center-center layout>AGENDA</a></paper-tab>
+		      	<paper-tab class="menuItem"><a href="../event.html" class="link" horizontal center-center layout>EVENEMENTS</a></paper-tab>
+		    	<paper-tab class="menuItem"><a href="../moderer.html" class="link" horizontal center-center layout>A MODERER</a></paper-tab>
 		    </paper-tabs>
 		  </core-toolbar>
 	  </div>
@@ -87,6 +97,7 @@
   </template>
   <script>
 	Polymer('my-header',{
+		selected : 0,
 		});
   </script>
 </polymer-element>

@@ -6,7 +6,7 @@
 <link href="../components/core-animation/core-animation-group.html" rel="import">
 <link href="../components/font-roboto/roboto.html" rel="import">
 
-<polymer-element name="my-like-button" attributes="like">
+<polymer-element name="my-like-button" attributes="like statutId">
   <template>
   	<style shim-shadowdom>
   		#target {
@@ -14,7 +14,7 @@
 	      font-size: 32px;
 	      -webkit-transform: translateZ(0);
 	      transform: translateZ(0);
-	      color: {{like ? '#512DA8':'#a9a9a9' }};
+	      color: {{like == 'true' ? "#512DA8" : "#a9a9a9"}};
 	      cursor: pointer;
 	    }
   	</style>
@@ -55,6 +55,10 @@
   <script>
 	Polymer('my-like-button',{
 		like: false,
+		statutId: 0,
+		ready: function(){
+		
+		},
 		buttonClick: function(e, detail, sender) {
 			
 			var player;
@@ -62,7 +66,17 @@
   			var a = this.shadowRoot.querySelector('core-animation,core-animation-group');
   			var icon = this.shadowRoot.querySelector('#target');
 		    a.target = icon;
-		    this.like = !this.like;
+		    
+		    if(this.like == 'true') this.like = 'false';
+		    else this.like = 'true';
+		    var like = this.like;
+		    
+		    var statutId = this.statutId;
+		    var scope = angular.element(document.getElementById(('controller'))).scope();
+      		scope.$apply(function () {
+		    	scope.aimer(statutId, like);
+		    });
+		    
 		    player = a.play();
 		    
     	},

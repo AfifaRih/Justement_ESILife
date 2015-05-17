@@ -22,7 +22,7 @@
 	      	transform: translateZ(0);
 	      	color: #a9a9a9;
 	      	font-family: 'Roboto-Light';
-	      	margin-right: 0.4em;
+	      	margin-right: 0.6em;
   		}
   		.load-text{
   			font-size: 15px;	
@@ -39,11 +39,16 @@
   		.load-file{
   			display: none;
   		}
+  		.icon{
+  			width: 20px;
+  			height: 25px;
+  			margin-right: 0.1em;
+  		}
   	</style>
     <div class="load-bar" layout horizontal>
 	<div on-click="{{imageClick}}" class="load-button">
 	    <div id="target-image" layout horizontal>
-	    	<core-icon icon="image:collections"> </core-icon>
+	    	<core-icon icon="image:collections" class="icon"> </core-icon>
 	      <core-animation-group type="seq">
 	        <core-animation duration="300">
 	          <core-animation-keyframe>
@@ -80,7 +85,7 @@
     </div>
     <div on-click="{{videoClick}}" class="load-button">
 	    <div id="target-vide" layout horizontal>
-	    	<core-icon icon="av:video-collection"></core-icon>
+	    	<core-icon icon="av:video-collection" class="icon"> </core-icon>
 	      <core-animation-group type="seq">
 	        <core-animation duration="300">
 	          <core-animation-keyframe>
@@ -117,7 +122,7 @@
     </div>
     <div on-click="{{courClick}}" class="load-button">
 	    <div id="target-cour" layout horizontal center>
-	    	<core-icon icon="editor:insert-drive-file"></core-icon>
+	    	<core-icon icon="editor:insert-drive-file" class="icon"> </core-icon>
 	      <core-animation-group type="seq">
 	        <core-animation duration="300">
 	          <core-animation-keyframe>
@@ -171,7 +176,7 @@
     	
     	fireImageClick: function(e, detail, sender) {
     		
-    		this.fire('core-signal', {name: "attach-image", data: sender.files[0]});
+    		this.fire('attach-image', {message: sender.files[0]});
     	},
     	
     	videoClick: function(e, detail, sender) {
@@ -189,7 +194,7 @@
     	
     	fireVideoClick: function(e, detail, sender) {
     		
-    		this.fire('core-signal', {name: "attach-video", data: sender.files[0]});
+    		this.fire('attach-video', {message: sender.files[0]});
     	},
     	
     	courClick: function(e, detail, sender) {

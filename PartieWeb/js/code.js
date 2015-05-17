@@ -1,3 +1,9 @@
 $(document).ready(function() {
-	alert('like');
+	
+	var scope = angular.element(document.getElementById(('controller'))).scope();
+	
+	//get mur
+	scope.$apply(function () {
+    	scope.getMur();
+    });
 });

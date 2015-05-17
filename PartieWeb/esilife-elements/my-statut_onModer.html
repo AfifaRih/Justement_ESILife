@@ -1,0 +1,43 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/paper-shadow/paper-shadow.html" rel="import">
+<link rel="import" href="my-statut-footer_onModer.html"/>
+<link rel="import" href="my-statut-header_onView.html"/>
+<link rel="import" href="my-statut-body_onView.html"/>
+
+<polymer-element name="my-statut_onModer" attributes="statut"
+		on-remove='{{remove}}'>
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			padding: 0.5em 0.3em;
+  			background-color: #FFFFFF;
+  		}
+  		.body{
+  			padding: 0.2em;
+  		}
+    </style>
+    
+    <paper-shadow class="card tag-container" z="1">
+  		<my-statut-header_onView class="header"
+  				userName='{{statut.userName}}'
+  				datePub='{{statut.datePub}}'>
+  			</my-statut-header_onView>
+	    <my-statut-body_onView class="body" 
+	    		contentText='{{statut.contentText}}'
+	    		contentMedia='{{statut.contentMedia}}'
+	    		statutId='{{statut.statutId}}'>
+	    	</my-statut-body_onView>
+	    <my-statut-footer_onModer class="footer"
+	    		statutId='{{statut.statutId}}'>
+	    	</my-statut-footer_onModer>
+    </aper-shadow>
+  </template>
+  <script>
+	Polymer('my-statut_onModer', {
+		statut: {},
+		ready: function () {
+	   },
+	});
+  </script>
+</polymer-element>

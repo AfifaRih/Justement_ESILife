@@ -1,0 +1,30 @@
+<script src="../webcomponentsjs/webcomponents.js"></script>
+
+  <link href="../core-collapse/core-collapse.html" rel="import">
+  <link href="../core-icons/core-icons.html" rel="import">
+  <link href="../paper-icon-button/paper-icon-button.html" rel="import">
+  <link href="../paper-item/paper-item.html" rel="import">
+
+  <link href="paper-dropdown.html" rel="import">
+
+<polymer-element name="x-trigger" extends="paper-icon-button" relative on-tap="{{toggle}}" noink>
+  <template>
+  	<style shim-shadowdom>
+  		*{
+	      z-index: auto;
+	    }
+    </style>
+    <shadow></shadow>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+      toggle: function() {
+        if (!this.dropdown) {
+          this.dropdown = this.querySelector('paper-dropdown');
+        }
+        this.dropdown && this.dropdown.toggle();
+      }
+    });
+  </script>
+  </polymer-element>

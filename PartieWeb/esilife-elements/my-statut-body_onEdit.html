@@ -21,12 +21,6 @@
   		}
     </style>
     
-    <core-signals on-core-signal-publier="{{publier}}"></core-signals>
-    
-    <core-signals on-core-signal-attach-image="{{attachImage}}"></core-signals>
-    <core-signals on-core-signal-attach-video="{{attachVideo}}"></core-signals>
-    <core-signals on-core-signal-attach-cours="{{attachCours}}"></core-signals>
-    
     <div class="tag-container">
     	<paper-input-decorator label="Exprimez-vous" layout>
 	      <paper-autogrow-textarea rows="3">
@@ -39,6 +33,8 @@
   </template>
   <script>
 	Polymer('my-statut-body_onEdit', {
+		file: null,
+		
 		annuler: function(e, detail, sender) {
         	var textArea = this.shadowRoot.querySelector('#statut-text');
         	textArea.value ="";
@@ -46,6 +42,8 @@
         	
         	var contentContainer = this.shadowRoot.querySelector('#fileDisplayArea');
         	contentContainer.innerHTML = "";
+        	
+        	file = null;
       	},
       	
       	publier: function(e, detail, sender) {
@@ -55,15 +53,16 @@
       		
       		var scope = angular.element(document.getElementById(('controller'))).scope();
       		scope.$apply(function () {
-		    	scope.publier(textArea.value, content.src);
+		    	scope.publier(textArea.value, file);
 		    });
       		this.annuler();
       	},
       	
       	attachImage: function (e, detail, sender) {
+      		alert(detail);
 			var imageType = /image.*/;
 			var fileDisplayArea = this.shadowRoot.querySelector('#fileDisplayArea');
-			
+			file = detail;
 			// Create a new image.
 		    var img = new Image();
 		    img.className = "fileView";
@@ -91,7 +90,7 @@
 			
 			var videoType = /video.*/;
 			var fileDisplayArea = this.shadowRoot.querySelector('#fileDisplayArea');
-			
+			file = detail;
 			// Create a new video.
 		    var video = document.createElement('video');
 			

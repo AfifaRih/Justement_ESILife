@@ -13,7 +13,7 @@
     <script src="../js/controllers.js"></script> 
     <script src="../js/services.js"></script> 
 
-<polymer-element name="my-statut-footer_OnEdit">
+<polymer-element name="my-statut-footer_onModif">
   <template>
   	<style shim-shadowdom>
   		.tag-container{
@@ -35,17 +35,21 @@
   		}
     </style>
     <div class="tag-container">
-    	<paper-button class="colored shadow" on-click='{{publierClick}}'>Publier</paper-button>
-    	<my-statut-button-load class="loader"></my-statut-button-load>
+    	<paper-button class="shadow" on-click='{{annulerClick}}'>Annuler</paper-button>
+    	<paper-button class="colored shadow" on-click='{{validerClick}}'>Valider</paper-button>
     </div>
   </template>
   <script src="../ng-polymer-elements/ng-polymer-elements.js"></script>
   <script>
-	Polymer('my-statut-footer_OnEdit',{
+	Polymer('my-statut-footer_onModif',{
 		
-		publierClick: function(e, detail, sender){
-			this.fire('publier');
+		annulerClick: function(e, detail, sender){
+			this.fire('annuler', {message: "message"});
 		},
+		
+		validerClick: function(e, detail, sender){
+			this.fire('get-content', {message: "message"});
+		}
 	});
   </script>
 </polymer-element>

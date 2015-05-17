@@ -13,9 +13,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 	<script src="components/webcomponentsjs/webcomponents.js"></script>
 	<link rel="import" href="components/paper-button/paper-button.html"/>
-	<link rel="import" href="esilife-elements/my-statut_onView.html">
+	<link rel="import" href="esilife-elements/my-statut_onModer.html">
 	<link rel="import" href="esilife-elements/my-statut_onEdit.html">
-	<link rel="import" href="esilife-elements/my-statut_onModif.html">
 	<link rel="import" href="esilife-elements/my-header.html">
 	<link rel="import" href="esilife-elements/my-newelement.html">
 	<link rel="import" href="esilife-elements/my-listFilter.html">
@@ -24,33 +23,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  
 	<link rel="stylesheet" type="text/css" href="style/style.css"> 
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    
-    <script src="js/bower_components/jquery/dist/jquery.js"></script>
+       <script src="js/bower_components/jquery/dist/jquery.js"></script>
     <script src="js/bower_components/angular/angular.js"></script>
     <script src="js/bower_components/angular-route/angular-route.js"></script>
     <script src="js/bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/app.js"></script> 
     <script src="js/controllers.js"></script> 
-    <script src="js/services.js"></script>  
-    <script src="js/code.js"></script>   
+    <script src="js/services.js"></script>   
 
 </head>
 <body unresolved id="controller" ng-controller="MurCtrl">
-	<my-header selected="0"></my-header>
+	<my-header selected="3"></my-header>
 	
 	<div horizontal layout class="bodyContainer">
-	  <div flex horizontal layout>
+	  <div flex horizontal layout >
 	  	<div flex two style="margin: 0 0.5em;">
 	  		<my-listFilter></my-listFilter>
 	  	</div>
 	  	<div flex four >
-	  		<div>
-				<my-statut_onEdit></my-statut_onEdit> 
-			</div>
-			<div>
-				<my-statut_onView class="statut" ng-repeat="cnt in contenu"
-					statut={{cnt}}>
-				</my-statut_onView> 
+			<div style="margin-top: -20px;">
+				<my-statut_onModer class='statut' statut='{"statutId":"12", "userName":"Afifa", "datePub":"datePub","contentText":"mon contenu", "like":"false", "nbrLike":"0"}'>
+						
+				</my-statut_onModer>
 			</div>
 	  	</div>
 	  	<div flex three style="margin: 0 0.5em;">

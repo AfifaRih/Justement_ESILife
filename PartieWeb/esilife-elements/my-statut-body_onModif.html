@@ -1,0 +1,42 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<link href="../components/font-roboto/roboto.html" rel="import">
+<link href="../components/paper-input/paper-autogrow-textarea.html" rel="import">
+<link href="../components/paper-input/paper-input-decorator.html" rel="import">
+<link href="../components/paper-input/paper-input.html" rel="import">
+<link href="../components/paper-input/paper-char-counter.html" rel="import">
+<link rel="import" href="../components/core-signals/core-signals.html">
+  
+<link rel="import" href="my-like-button.html"/>
+
+<polymer-element name="my-statut-body_onModif" attributes="content statutId">
+  <template>
+  	<style shim-shadowdom>
+  		.fileView{
+  			max-width: 80%;
+  			margin: auto;
+  			display: block;
+  			position: relative;
+  		}
+    </style>
+    
+    
+    <div class="tag-container">
+    	<paper-input-decorator label="Exprimez-vous" layout>
+	      <paper-autogrow-textarea>
+	        <textarea id="statut-text" autofocus>{{content}}</textarea>
+	      </paper-autogrow-textarea>
+	    </paper-input-decorator>
+    </div>
+  </template>
+  <script>
+	Polymer('my-statut-body_onModif', {
+		content : "",
+		get_content: function(e, detail, sender) {
+      		var contentText = this.shadowRoot.querySelector('#statut-text');
+			this.fire('valider', {message: contentText.value});
+		}
+	});
+  </script>
+</polymer-element>

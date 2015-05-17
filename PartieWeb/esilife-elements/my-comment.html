@@ -1,0 +1,44 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/core-icons/-icons.html" rel="import">
+
+<polymer-element name="my-comment" attributes="comment">
+  <template>
+  	<style shim-shadowdom>
+		.userName{
+			font-size: 14px;
+			font-weight: bold;
+		}
+		.date{
+			font-size: 10px;
+		}
+		.icon{
+			color: #512DA8;
+			width: 20px;
+			height: 20px;
+		}
+		.content{
+			
+			font-size: 14px;
+		}
+		.tag-container{
+			padding: 0.3em;
+		}
+  	</style>
+  	<div vertical layout class="tag-container">
+  		<div >
+  			<core-icon icon="communication:chat" class='icon'></core-icon>
+		 	<span class="userName">{{comment.userName}}</span>
+		 	<span class="date"> - {{comment.date}}</span>
+	 	</div>
+	 	<div>
+	 	<span class="content">{{comment.content}}</span>
+	 	</div>
+	</div>
+  </template>
+  <script>
+	Polymer('my-comment',{
+		comment:{},
+	});
+  </script>
+</polymer-element>

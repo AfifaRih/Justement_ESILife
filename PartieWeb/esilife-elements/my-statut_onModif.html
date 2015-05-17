@@ -1,0 +1,37 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<link href="../components/paper-shadow/paper-shadow.html" rel="import">
+<link href="my-statut-body_onModif.html" rel="import" />
+<link href="my-statut-footer_onModif.html" rel="import" />
+
+
+<polymer-element name="my-statut_onModif" attributes="content statutId"
+			on-get-content='{{get_content}}'>
+  <template>
+  	<style shim-shadowdom>
+  		.tag-container{
+  			padding: 0.5em 0.3em;
+  			background-color: #FFFFFF;
+  		}
+  		.body{
+  			padding: 0.2em;
+  		}
+    </style>
+    
+    <paper-shadow class="card tag-container" z="1" id="container">
+	    <my-statut-body_onModif class="body" content='{{content}}' statutId='{{statutId}}'>
+	    	</my-statut-body_onModif>
+	    <my-statut-footer_onModif class="footer">
+	    	</my-statut-footer_onModif>
+    </paper-shadow>
+  </template>
+  <script>
+	Polymer('my-statut_onModif', {
+		statutId: 0,
+		get_content: function(e, detail, sender) {
+	  		var body = this.shadowRoot.querySelector('my-statut-body_onModif');
+	  		body.get_content();
+	    }
+	});
+  </script>
+</polymer-element>

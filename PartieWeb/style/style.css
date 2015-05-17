@@ -14,6 +14,10 @@ body, html{
 	margin: 0.05px;
 }
 
+*{
+	font-family: 'Roboto-Light';
+}
+
 @font-face {
     font-family: "Roboto-Light";
     src: url(../Roboto/Roboto/Roboto-Light.ttf) format("truetype");
