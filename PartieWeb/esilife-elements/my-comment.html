@@ -28,11 +28,11 @@
   	<div vertical layout class="tag-container">
   		<div >
   			<core-icon icon="communication:chat" class='icon'></core-icon>
-		 	<span class="userName">{{comment.userName}}</span>
-		 	<span class="date"> - {{comment.date}}</span>
+		 	<span class="userName">{{comment.utilisateur.nom_utilisateur}}</span>
+		 	<span class="date"> - {{comment.date_commentaire}}</span>
 	 	</div>
 	 	<div>
-	 	<span class="content">{{comment.content}}</span>
+	 	<span class="content">{{comment.contenu_commentaire}}</span>
 	 	</div>
 	</div>
   </template>

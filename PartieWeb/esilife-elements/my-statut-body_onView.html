@@ -11,7 +11,7 @@
  
 <link rel="import" href="my-like-button.html"/>
 
-<polymer-element name="my-statut-body_onView" attributes="contentText contentMedia statutId"
+<polymer-element name="my-statut-body_onView" attributes="contentText contentMedia statutId typeMedia"
 			on-valider='{{valider}}'
 			on-annuler='{{annuler}}'>
   <template id='template'>
@@ -35,24 +35,28 @@
   <script>
 	Polymer('my-statut-body_onView', {
 		contentText: "",
-		contentMedia: new File([""], "filename"),
+		contentMedia: null,
 		statutId: 0,
+		typeMedia: "",
+		domReady: function(){
+			/*alert('changed '+this.contentMedia);
+		},
 		click : function(){
-			//var scope = angular.element(document.getElementById(('controller'))).scope();
-			//this.contentMedia = scope.file;
-
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+			this.contentMedia = scope.file;
+*/
+alert("contentMedia " +this.contentMedia);
 			if(this.contentMedia != null){
 			
 				var content, exist = false;
 	      		var contentImage = /image.*/;
 	      		var contentVideo = /video.*/;
 	      		
-				if(this.contentMedia.type.match(contentImage)){
-					
+				if(this.typeMedia.match(contentImage)){
 					alert('image');
 					content = new Image();
 					exist = true;
-				}else if(this.contentMedia.type.match(contentVideo)){
+				}else if(this.typeMedia.match(contentVideo)){
 					
 					alert('video');
 					content = document.createElement('video');
@@ -70,9 +74,10 @@
 					
 					    // Set the img src property using the data URL.
 					    content.src = reader.result;
+					    alert(reader.result);
 					  }
 					  
-					  reader.readAsDataURL(this.contentMedia); 
+					  reader.readAsDataURL(this.b64toBlob(this.contentMedia), this.typeMedia, 512); 
 					this.shadowRoot.querySelector('#fileDisplayArea').appendChild(content);
 				} else { alert('rien ')}
 			}else { alert('null')}
@@ -111,7 +116,30 @@
       	
       	heard: function(e, detail, sender) {
 	        alert('heard ');
-	      }
+	      },
+	      b64toBlob: function(b64Data, contentType, sliceSize) {
+		    contentType = contentType || '';
+		    sliceSize = sliceSize || 512;
+		
+		    var byteCharacters = atob(b64Data);
+		    var byteArrays = [];
+		
+		    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+		        var slice = byteCharacters.slice(offset, offset + sliceSize);
+		
+		        var byteNumbers = new Array(slice.length);
+		        for (var i = 0; i < slice.length; i++) {
+		            byteNumbers[i] = slice.charCodeAt(i);
+		        }
+		
+		        var byteArray = new Uint8Array(byteNumbers);
+		
+		        byteArrays.push(byteArray);
+		    }
+		
+		    var blob = new Blob(byteArrays, {type: contentType});
+		    return blob;
+		}
 	});
   </script>
 </polymer-element>

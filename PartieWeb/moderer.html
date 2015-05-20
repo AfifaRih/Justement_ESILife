@@ -42,9 +42,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  	</div>
 	  	<div flex four >
 			<div style="margin-top: -20px;">
-				<my-statut_onModer class='statut' statut='{"statutId":"12", "userName":"Afifa", "datePub":"datePub","contentText":"mon contenu", "like":"false", "nbrLike":"0"}'>
-						
-				</my-statut_onModer>
+				<my-statut_onModer class="statut" ng-repeat="cnt in contenuMod"
+					statut={{cnt}}>
+				</my-statut_onModer> 
 			</div>
 	  	</div>
 	  	<div flex three style="margin: 0 0.5em;">
@@ -54,5 +54,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  </div>
 	</div>
 	<script src="ng-polymer-elements/ng-polymer-elements.js"></script>
+	<script>
+		$(document).ready(function() {
+	
+	alert('script');
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+			
+		    scope.currentUser = new UtilisateurCourant(20, "afifa", null, "ba_rih@esi.dz");
+			//get list a moderer
+			scope.$apply(function () {
+		    	scope.getContenuAModerer();
+		    	alert("contenuMod "+scope.contenuMod);
+		    });
+  		});
+	</script>
 </body>
 </html>

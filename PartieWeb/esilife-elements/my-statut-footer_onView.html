@@ -25,7 +25,7 @@
 	    	<my-like-button like='{{like}}' statutId='{{statutId}}'></my-like-button>
 	    	<div flex class="stat">
 		    	<label>{{nbrLike}} J'aime.</label></br>
-		    	<label>{{nbrLike}} Commentaires.</label>
+		    	<label>{{nbrCom}} Commentaires.</label>
 		    </div>
 	    </div>
 	    <paper-input-decorator label="Ajouter un commentaire" style="width: 100%">
@@ -39,7 +39,37 @@
 	Polymer('my-statut-footer_onView',{
 		like: false,
 		nbrLike: 0,
+		nbrCom: 0,
 		statutId: 0,
+		listUser: [],
+		
+		domReady: function(){
+			alert(this.statutId);
+			var statutId = this.statutId;
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+			
+			//Récupérer la liste des j'aimes
+			var listUser;
+      		scope.$apply(function () {
+		    	listUser = scope.getListUtilisateurLike(statutId);
+		    });
+		    this.listUser = listUser;
+		    this.nbrLike = listUser.length;
+		    
+		    //Récupérer nbr de commentaires
+		    var nbrCom;
+		    scope.$apply(function () {
+		    	nbrCom = scope.getListCommentaire(statutId).length;
+		    });
+		    this.nbrCom = nbrCom;
+		    
+		    //vérifier si l'utilisateur courant aime le contenu
+		    var scope = angular.element(document.getElementById(('controller'))).scope();
+			var currentUserId = scope.currentUser.utilisateur_cle;
+			for(var i=0; i<listUser.length; i++){
+				if(listUser[i].utilisateur_cle == currentUserId) this.like = 'true';
+			}
+		}
 	});
 	function commenter(e){
 		if(event.keyCode == 13){

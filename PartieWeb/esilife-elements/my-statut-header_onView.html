@@ -54,12 +54,13 @@
 	    	</div>
     	</div>
     	<div>
-		  <x-trigger icon="expand-more" style="color: #a9a9a9">
+		  <x-trigger icon="expand-more" style="color: #a9a9a9, z-index: 100">
 	        <paper-dropdown halign="right">
-	          <div class="menu">
-	            <paper-item on-click='{{modifierClick}}'>Modifier</paper-item>
-	            <paper-item on-click='{{supprimerClick}}'>Supprimer</paper-item>
-	            <paper-item on-click='{{suivreClick}}'>Suivre {{userName}}</paper-item>
+	          <div class="menu">  	
+		            <paper-item on-click='{{modifierClick}}'>Modifier</paper-item>
+		            <paper-item on-click='{{supprimerClick}}'>Supprimer</paper-item>
+	            	<paper-item on-click='{{suivreClick}}'>Suivre {{userName}}</paper-item>
+	            
 	          </div>
 	        </paper-dropdown>
 	      </x-trigger>
@@ -69,6 +70,12 @@
   <script>
 	Polymer("my-statut-header_onView", {
 		userId: 0,
+		currentUserId: 1,
+		domReady: function(){
+/*			alert("userId ");
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+			this.currentUserId = scope.currentUser.utilisateur_cle;*/
+		},
 		
 		modifierClick: function(e, detail, sender){
 			this.fire('modifier', {message: "message"});

@@ -2,15 +2,15 @@
 
 <link rel="import" href="my-comment.html"/>
 
-<polymer-element name="my-statut_listComment" attributes="content">
+<polymer-element name="my-statut_listComment" attributes="statutId">
   <template>
   	<style shim-shadowdom>
 		.tag-container{
 			background-color: #f4f4f6;
 		}
   	</style>
-  	<div vertical layout class="tag-container">
-  		<template repeat='{{comment in content.list}}'>
+  	<div vertical layout class="tag-container" id="tag-container">
+  		<template repeat='{{comment in comment}}'>
   			<my-comment comment='{{comment}}'></my-comment>
   			<div style="height: 2px;"></div>
   		</template>
@@ -18,7 +18,19 @@
   </template>
   <script>
 	Polymer('my-statut_listComment',{
-		content:{},
+		statutId:0,
+		comment: [],
+		domReady: function () {
+			
+			var statutId = this.statutId;
+			var comment;
+			var scope = angular.element(document.getElementById(('controller'))).scope();
+			scope.$apply(function () {
+		    	comment = scope.getListCommentaire(statutId);
+		    });
+		    this.comment = comment;
+	    },
+
 	});
   </script>
 </polymer-element>

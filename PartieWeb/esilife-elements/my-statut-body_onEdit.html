@@ -50,7 +50,7 @@
       		
       		var textArea = this.shadowRoot.querySelector('#statut-text');
       		var content = this.shadowRoot.querySelector('#fileDisplayArea').firstChild;
-      		
+      		var file = this.file;
       		var scope = angular.element(document.getElementById(('controller'))).scope();
       		scope.$apply(function () {
 		    	scope.publier(textArea.value, file);
@@ -90,7 +90,7 @@
 			
 			var videoType = /video.*/;
 			var fileDisplayArea = this.shadowRoot.querySelector('#fileDisplayArea');
-			file = detail;
+			this.file = detail;
 			// Create a new video.
 		    var video = document.createElement('video');
 			

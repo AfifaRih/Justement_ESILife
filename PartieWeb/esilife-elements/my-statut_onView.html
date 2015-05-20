@@ -32,7 +32,8 @@
 		    <my-statut-body_onView class="body" 
 		    		contentText='{{statut.contentText}}'
 		    		contentMedia='{{statut.contentMedia}}'
-		    		statutId='{{statut.statutId}}'>
+		    		statutId='{{statut.statutId}}'
+		    		typeMedia='{{statut.contenuType}}'>
 		    	</my-statut-body_onView>
 		    <my-statut-footer_onView class="footer"
 		    		like='{{statut.like}}'
@@ -40,15 +41,13 @@
 		    		statutId='{{statut.statutId}}'>
 		    	</my-statut-footer_onView>
     	</div>
-		<my-statut_listComment content='{{comment}}'></my-statut_listComment>
+		<my-statut_listComment statutId='{{statut.statutId}}'></my-statut_listComment>
     </paper-shadow>
   </template>
   <script>
 	Polymer('my-statut_onView', {
 		statut: {},
-		comment: {},
-		ready: function () {
-	   },
+		
 	    
       	modifier: function(e, detail, sender) {
       		var body = this.shadowRoot.querySelector('my-statut-body_onView');
