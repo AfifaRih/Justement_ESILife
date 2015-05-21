@@ -1,10 +1,18 @@
 package com.service;
 
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,6 +23,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.bdd.ConnecteurBdd;
+import com.google.api.client.googleapis.util.Utils;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
@@ -56,8 +65,7 @@ public class ServiceStatus {
 
 	public Contenu getConetenu(JSONObject JsonPacket,InputStream file) throws JSONException, IOException{
 		Contenu status=new Contenu();
-		byte[] tabFichier=null;
-		if(file!=null)file.read(tabFichier);
+		byte[] tabFichier=getBytes(file);
 		status.setContenu_text(JsonPacket.getString("status"));
 		status.setCle_utilisateur(JsonPacket.getInt("id_user"));
 		status.setContenu_date_modification(toDate(JsonPacket.get("date_modification")));
@@ -72,6 +80,25 @@ public class ServiceStatus {
 
 	@SuppressWarnings("deprecation")
 	private Date toDate(Object object) {
-		return new Date((String) object);
+		return new Date((Long) object);
 	}
+	public static byte[] getBytes(InputStream is) throws IOException {
+
+	    int len;
+	    int size = 1024;
+	    byte[] buf;
+
+	    if (is instanceof ByteArrayInputStream) {
+	      size = is.available();
+	      buf = new byte[size];
+	      len = is.read(buf, 0, size);
+	    } else {
+	      ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	      buf = new byte[size];
+	      while ((len = is.read(buf, 0, size)) != -1)
+	        bos.write(buf, 0, len);
+	      buf = bos.toByteArray();
+	    }
+	    return buf;
+	  }
 }

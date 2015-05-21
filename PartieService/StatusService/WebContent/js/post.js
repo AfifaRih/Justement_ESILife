@@ -63,7 +63,7 @@ $(document).ready(function() {
 function upload(){
 	var XHR = new XMLHttpRequest();
 	var FD  = new FormData();
-	var jsObj = {id_user:1,id_contenu:"chalalalallalallalalal"};
+	var jsObj = {status:$('#status').val(),date_modification:$('#date_modification').val(),date_publication:$('#date_publication').val(),id_user:1,type:'image'};
 	  // We define what will happen if the data are successfully sent
 	  XHR.addEventListener('load', function(event) {
 	    alert('Yeah! Data sent and response loaded.');
@@ -76,8 +76,65 @@ function upload(){
 	  // We setup our request
 	  FD.append("file",document.getElementById("fichierUpload").files[0]);
 	  FD.append("status",JSON.stringify(jsObj));
-	  XHR.open('POST', 'http://localhost:8080/StatusService/api/test/upload');	  
+	  XHR.open('POST', 'http://localhost:8080/StatusService/api/status/update');	  
 	  // We just send our FormData object, HTTP headers are set automatically
 	  XHR.send(FD);
+	  getMur();
 }
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+function getUser(id_user){
+    var userJson=JSON.parse(httpGet('http://localhost:8080/StatusService/api/utilisateur/get_utilisateur?id_user='+id_user));
+    var user=new Utilisateur(userJson.cle_user,userJson.compte_user);
+    return user;
+}
+function getMur(){
+	var tabContenu=JSON.parse(httpGet('http://localhost:8080/StatusService/api/contenu/murSempel'));
+	var b64Data,contentType='image/png',blob;
+	for(i=0;i<tabContenu.length;i++){
+		if(tabContenu[i].contenu_binaire!=null){
+			b64Data=tabContenu[i].contenu_binaire;
+			blob=b64toBlob(b64Data.replace(/\s/g, ''),contentType,512);
+		}
+	}
+	var blobUrl = URL.createObjectURL(blob);
+	var fichier=blobToFile(blob,"image-test.png");
+
+	window.location = blobUrl;
+}
+function b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+}
+function blobToFile(theBlob, fileName){
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+}
+
 
